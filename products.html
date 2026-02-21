@@ -3,121 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الملفات | تحسينك</title>
+
+<title>نماذج الأعمال | تحسينك</title>
+
+<meta name="description" content="استعرض نماذج أعمال تحسينك من ملفات الإنجاز والأداء الوظيفي والتحضير التعليمي المصممة باحترافية للمعلمين في السعودية.">
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+
+<style>
+/* ===== PORTFOLIO GRID ===== */
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.portfolio-card{
+  text-align:center;
+}
+
+.portfolio-image{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.08);
+  cursor:pointer;
+}
+
+.portfolio-image img{
+  width:100%;
+  display:block;
+  transition:0.4s ease;
+}
+
+.portfolio-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,108,53,0.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:0.3s ease;
+}
+
+.portfolio-overlay span{
+  background:#fff;
+  color:#006C35;
+  padding:10px 20px;
+  border-radius:30px;
+  font-weight:700;
+}
+
+.portfolio-image:hover img{
+  transform:scale(1.1);
+}
+
+.portfolio-image:hover .portfolio-overlay{
+  opacity:1;
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  padding:20px;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:85%;
+  border-radius:20px;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:25px;
+  left:35px;
+  font-size:40px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.lightbox-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:40px;
+  color:#fff;
+  cursor:pointer;
+  user-select:none;
+}
+
+.lightbox-prev{
+  right:40px;
+}
+
+.lightbox-next{
+  left:40px;
+}
+</style>
 </head>
+
 <body>
 
 <header class="navbar">
   <div class="container nav-container">
     <div class="logo">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="#0083B0">
-        <path d="M12 2L2 7l10 5 10-5-10-5zm0 7L2 14l10 5 10-5-10-5z"/>
-      </svg>
       <span>تحسينك</span>
     </div>
-
     <nav class="nav-links">
       <a href="index.html">الرئيسية</a>
       <a href="services.html">الخدمات</a>
-      <a href="products.html">الملفات</a>
+      <a href="products.html">نماذج الأعمال</a>
       <a href="contact.html">تواصل معنا</a>
-      <a class="btn-primary"
-         href="https://wa.me/966551961517?text=أرغب%20في%20طلب%20خدمة%20من%20موقع%20تحسينك"
-         target="_blank">
-         اطلب الآن
-      </a>
     </nav>
-
-    <div class="menu-toggle" id="menuToggle">☰</div>
   </div>
 </header>
 
 <section class="hero" style="height:50vh; background:url('assets/images/products.jpg') center/cover no-repeat;">
   <div class="overlay"></div>
   <div class="hero-content">
-    <h1>عرض الملفات التعليمية</h1>
-    <p>نماذج جاهزة قابلة للتخصيص والتعديل</p>
+    <h1>نماذج أعمالنا</h1>
+    <p>نماذج حقيقية من أعمالنا الاحترافية للمعلمين والمعلمات</p>
   </div>
 </section>
 
 <section>
   <div class="container">
+    <div class="portfolio-grid">
 
-    <div class="products-grid">
-
-      <!-- Product Card -->
-      <div class="product-card">
-        <img src="assets/images/sample1.jpg" alt="ملف تعليمي">
+      <div class="portfolio-card">
+        <div class="portfolio-image" onclick="openLightbox(0)">
+          <img src="assets/images/sample1.jpg" alt="نموذج خطة دراسية" loading="lazy">
+          <div class="portfolio-overlay">
+            <span>عرض النموذج</span>
+          </div>
+        </div>
         <h3>نموذج خطة دراسية</h3>
-        <p>ملف Word قابل للتعديل ومنسق رسميًا.</p>
-        <a class="btn-primary"
-           href="https://wa.me/966551961517?text=أرغب%20بطلب%20نموذج%20خطة%20دراسية"
-           target="_blank">طلب عبر واتساب</a>
       </div>
 
-      <div class="product-card">
-        <img src="assets/images/sample2.jpg" alt="ملف إنجاز">
-        <h3>ملف إنجاز معلم</h3>
-        <p>تصميم احترافي متوافق مع متطلبات الوزارة.</p>
-        <a class="btn-primary"
-           href="https://wa.me/966551961517?text=أرغب%20بطلب%20ملف%20إنجاز"
-           target="_blank">طلب عبر واتساب</a>
+      <div class="portfolio-card">
+        <div class="portfolio-image" onclick="openLightbox(1)">
+          <img src="assets/images/sample2.jpg" alt="ملف إنجاز معلم" loading="lazy">
+          <div class="portfolio-overlay">
+            <span>عرض النموذج</span>
+          </div>
+        </div>
+        <h3>ملف إنجاز احترافي</h3>
       </div>
 
-      <div class="product-card">
-        <img src="assets/images/sample3.jpg" alt="ملف أداء وظيفي">
+      <div class="portfolio-card">
+        <div class="portfolio-image" onclick="openLightbox(2)">
+          <img src="assets/images/sample3.jpg" alt="تقرير أداء وظيفي" loading="lazy">
+          <div class="portfolio-overlay">
+            <span>عرض النموذج</span>
+          </div>
+        </div>
         <h3>تقرير أداء وظيفي</h3>
-        <p>ملف متكامل لتقييم الأداء السنوي.</p>
-        <a class="btn-primary"
-           href="https://wa.me/966551961517?text=أرغب%20بطلب%20تقرير%20أداء%20وظيفي"
-           target="_blank">طلب عبر واتساب</a>
       </div>
 
-      <div class="product-card">
-        <img src="assets/images/sample4.jpg" alt="نموذج تحضير">
-        <h3>نموذج تحضير درس</h3>
-        <p>تحضير جاهز قابل للتعديل وفق المنهج.</p>
-        <a class="btn-primary"
-           href="https://wa.me/966551961517?text=أرغب%20بطلب%20تحضير%20درس"
-           target="_blank">طلب عبر واتساب</a>
+      <div class="portfolio-card">
+        <div class="portfolio-image" onclick="openLightbox(3)">
+          <img src="assets/images/sample4.jpg" alt="تحضير درس" loading="lazy">
+          <div class="portfolio-overlay">
+            <span>عرض النموذج</span>
+          </div>
+        </div>
+        <h3>تحضير درس جاهز</h3>
       </div>
 
     </div>
-
   </div>
 </section>
 
 <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <h4>عن تحسينك</h4>
-      <p>منصة تعليمية رقمية تقدم خدمات احترافية للمعلمين والمعلمات في السعودية.</p>
-    </div>
-
-    <div>
-      <h4>روابط سريعة</h4>
-      <ul>
-        <li><a href="services.html">الخدمات</a></li>
-        <li><a href="contact.html">تواصل معنا</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>تواصل معنا</h4>
-      <p>📱 واتساب: +966551961517</p>
-      <p>📢 تيليجرام: t.me/Tahsenk</p>
-      <p>📧 thseenk100@gmail.com</p>
-    </div>
-  </div>
-
   <div class="copyright">
     © 2026 تحسينك - جميع الحقوق محفوظة
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="outsideClick(event)">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <span class="lightbox-nav lightbox-prev" onclick="prevImage()">❮</span>
+  <img id="lightbox-img">
+  <span class="lightbox-nav lightbox-next" onclick="nextImage()">❯</span>
+</div>
+
+<script>
+const images = [
+  "assets/images/sample1.jpg",
+  "assets/images/sample2.jpg",
+  "assets/images/sample3.jpg",
+  "assets/images/sample4.jpg"
+];
+
+let currentIndex = 0;
+
+function openLightbox(index){
+  currentIndex = index;
+  document.getElementById("lightbox-img").src = images[currentIndex];
+  document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox(){
+  document.getElementById("lightbox").style.display = "none";
+}
+
+function nextImage(){
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("lightbox-img").src = images[currentIndex];
+}
+
+function prevImage(){
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("lightbox-img").src = images[currentIndex];
+}
+
+function outsideClick(e){
+  if(e.target.id === "lightbox"){
+    closeLightbox();
+  }
+}
+</script>
+
 </body>
 </html>
