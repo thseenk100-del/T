@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تفاصيل المنتج | تحسينك</title>
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.gallery img{
+  width:100%;
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.gallery img:hover{
+  transform:scale(1.05);
+}
+.product-actions{
+  margin-top:40px;
+  text-align:center;
+}
+.product-actions a{
+  display:inline-block;
+  margin:10px;
+  padding:12px 25px;
+  border-radius:30px;
+  font-weight:bold;
+  text-decoration:none;
+}
+.order-btn{
+  background:#006C35;
+  color:#fff;
+}
+.telegram-btn{
+  background:#0088cc;
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" style="padding:60px 0;">
+  <h1 id="productName"></h1>
+  <p id="productDescription"></p>
+
+  <div class="gallery" id="gallery"></div>
+
+  <div class="product-actions">
+    <a id="orderBtn" class="order-btn" target="_blank">طلب عبر واتساب</a>
+    <a href="https://t.me/Tahsenk" target="_blank" class="telegram-btn">قناة تيليجرام</a>
+  </div>
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
+
+fetch("data/products.json")
+.then(res=>res.json())
+.then(data=>{
+  const product=data[id];
+  document.getElementById("productName").innerText=product.name;
+  document.getElementById("productDescription").innerText=product.description;
+
+  document.getElementById("orderBtn").href=
+    `https://wa.me/966551961517?text=أرغب بطلب ${product.name}`;
+
+  const gallery=document.getElementById("gallery");
+  for(let i=1;i<=20;i++){
+    const img=document.createElement("img");
+    img.src=`assets/images/products/product${id}/${i}.jpg`;
+    img.loading="lazy";
+    gallery.appendChild(img);
+  }
+});
+</script>
+
+</body>
+</html>
