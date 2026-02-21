@@ -533,3 +533,79 @@ h3::after{
 .cart-panel button:hover{
   filter:brightness(1.08);
 }
+/* ===============================
+   PORTFOLIO GALLERY
+================================= */
+
+.portfolio-card{
+  text-align:center;
+}
+
+.portfolio-image{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.portfolio-image img{
+  width:100%;
+  display:block;
+  transition:0.4s ease;
+}
+
+.portfolio-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,108,53,0.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:0.3s ease;
+}
+
+.portfolio-overlay button{
+  background:#fff;
+  color:var(--primary);
+  padding:10px 20px;
+  border:none;
+  border-radius:30px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.portfolio-image:hover img{
+  transform:scale(1.1);
+}
+
+.portfolio-image:hover .portfolio-overlay{
+  opacity:1;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+}
+
+.close-lightbox{
+  position:absolute;
+  top:30px;
+  left:40px;
+  font-size:40px;
+  color:#fff;
+  cursor:pointer;
+}
