@@ -368,3 +368,86 @@ section {
 @media(max-width:576px){
   .contact-grid { grid-template-columns: 1fr; }
 }
+/* ===== SAUDI PREMIUM THEME ===== */
+
+:root{
+  --primary:#006C35;
+  --primary-light:#008753;
+  --gold:#C9A227;
+  --bg-soft:#F4F8F5;
+  --text-dark:#1E1E1E;
+}
+
+/* خلفية عامة أنظف */
+body{
+  background:#ffffff;
+  color:var(--text-dark);
+}
+
+/* Navbar أفخم */
+.navbar{
+  background:#ffffff;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo span{
+  color:var(--primary);
+  font-weight:700;
+}
+
+/* أزرار احترافية */
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  border:none;
+}
+
+.btn-primary:hover{
+  filter:brightness(1.08);
+  box-shadow:0 10px 30px rgba(0,108,53,0.25);
+}
+
+/* Hero أهدأ */
+.hero .overlay{
+  background:rgba(0,0,0,0.55);
+}
+
+/* أقسام بخلفية سعودية خفيفة */
+.features,
+section:nth-child(even){
+  background:var(--bg-soft);
+}
+
+/* كروت أفخم */
+.feature,
+.product-card,
+.contact-card{
+  border:1px solid rgba(0,108,53,0.08);
+  box-shadow:0 8px 25px rgba(0,0,0,0.04);
+}
+
+.feature:hover,
+.product-card:hover,
+.contact-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 40px rgba(0,108,53,0.15);
+}
+
+/* CTA رسمي */
+.cta{
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+}
+
+/* لمسة ذهبية للعناوين */
+h2,h3{
+  position:relative;
+}
+
+h2::after,
+h3::after{
+  content:"";
+  width:40px;
+  height:3px;
+  background:var(--gold);
+  display:block;
+  margin-top:8px;
+}
