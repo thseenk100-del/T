@@ -724,3 +724,44 @@ h3::after{
   height:48px; /* مساحة ثابتة لسطرين */
   overflow:hidden;
 }
+/* ===== PRODUCT CARD FIXED SIZE ===== */
+
+.horizontal-scroll{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:10px 40px;
+  align-items:stretch;
+}
+
+.product-card{
+  flex:0 0 260px;
+  height:360px;
+  background:#fff;
+  border-radius:18px;
+  padding:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:0.3s;
+}
+
+.product-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.product-card h3{
+  font-size:15px;
+  line-height:1.5;
+  height:48px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
