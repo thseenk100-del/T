@@ -275,12 +275,23 @@ fetch("./data/products.json")
 
     <div class="horizontal-scroll">
       ${items.map(item => `
-        <div class="product-card">
-          <img src="images/products/product${item.id}/1.webp" loading="lazy">
-          <h3>${item.name}</h3>
-          <a href="product.html?id=${item.id}" class="btn-primary">عرض التفاصيل</a>
-        </div>
-      `).join("")}
+  <div class="product-card">
+
+    <img 
+      class="product-thumb"
+      data-id="${item.id}"
+      alt="${item.name}"
+      loading="lazy"
+    >
+
+    <h3>${item.name}</h3>
+
+    <a href="product.html?id=${item.id}" class="btn-primary">
+      عرض التفاصيل
+    </a>
+
+  </div>
+`).join("")}
     </div>
 
     <button class="scroll-btn left">❯</button>
