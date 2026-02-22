@@ -266,26 +266,26 @@ fetch("./data/products.json")
     const section = document.createElement("div");
 
     section.innerHTML = `
-      <div class="category-title">
-        <h2>${categoryName}</h2>
-      </div>
+  <div class="category-title">
+    <h2>${categoryName}</h2>
+  </div>
 
-      <div class="slider-wrapper">
-        <button class="scroll-btn right">❮</button>
+  <div class="slider-wrapper">
+    <button class="scroll-btn right">❮</button>
 
-        <div class="horizontal-scroll">
-          ${items.map(item => `
-            <div class="product-card">
-              <img src="assets/images/products/product${item.id}/1.webp" loading="lazy">
-              <h3>${item.name}</h3>
-              <a href="product.html?id=${item.id}" class="btn-primary">عرض التفاصيل</a>
-            </div>
-          `).join("")}
+    <div class="horizontal-scroll">
+      ${items.map(item => `
+        <div class="product-card">
+          <img src="assets/images/products/product${item.id}/1.webp" loading="lazy">
+          <h3>${item.name}</h3>
+          <a href="product.html?id=${item.id}" class="btn-primary">عرض التفاصيل</a>
         </div>
+      `).join("")}
+    </div>
 
-        <button class="scroll-btn left">❯</button>
-      </div>
-    `;
+    <button class="scroll-btn left">❯</button>
+  </div>
+`;
 
     container.appendChild(section);
   });
@@ -307,6 +307,5 @@ fetch("./data/products.json")
 })
 .catch(err => console.error("JSON Error:", err));
 </script>
-  
 </body>
 </html>
