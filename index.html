@@ -318,5 +318,73 @@ fetch("./data/products.json")
 })
 .catch(err => console.error("JSON Error:", err));
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const thumbs = document.querySelectorAll(".product-thumb");
+
+  thumbs.forEach(img => startSlider(img));
+
+  async function startSlider(img){
+
+    const id = img.dataset.id;
+
+    // الصيغ المدعومة
+    const formats = ["webp","jpg","jpeg","png"];
+
+    // أقصى عدد نبحث عنه
+    const maxImages = 20;
+
+    let validImages = [];
+    let current = 0;
+
+    function checkImage(src){
+      return new Promise(resolve=>{
+        const test = new Image();
+        test.src = src;
+        test.onload = ()=> resolve(src);
+        test.onerror = ()=> resolve(null);
+      });
+    }
+
+    // البحث عن الصور الموجودة فقط
+    for(let i=1; i<=maxImages; i++){
+      for(const ext of formats){
+
+        const path = `images/products/product${id}/${i}.${ext}`;
+
+        const exists = await checkImage(path);
+
+        if(exists){
+          validImages.push(path);
+        }
+      }
+    }
+
+    if(validImages.length === 0) return;
+
+    // عرض أول صورة
+    img.src = validImages[0];
+
+    // لو صورة واحدة فقط لا نحرك
+    if(validImages.length === 1) return;
+
+    // التقليب التلقائي
+    setInterval(()=>{
+      current = (current + 1) % validImages.length;
+
+      img.style.opacity = 0;
+
+      setTimeout(()=>{
+        img.src = validImages[current];
+        img.style.opacity = 1;
+      },200);
+
+    }, 3000);
+
+  }
+
+});
+</script>
 </body>
 </html>
