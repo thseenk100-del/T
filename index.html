@@ -320,6 +320,7 @@ document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
 .catch(err => console.error("JSON Error:", err));
 </script>
 <script>
+
 async function startSlider(img){
 
   const id = img.dataset.id;
@@ -364,6 +365,19 @@ async function startSlider(img){
 
   },3000);
 }
+
+fetch("./data/products.json")
+.then(res => res.json())
+.then(products => {
+
+  // هنا كود بناء الأقسام
+
+  document.querySelectorAll(".product-thumb")
+          .forEach(img => startSlider(img));
+
+});
+
 </script>
+
 </body>
 </html>
