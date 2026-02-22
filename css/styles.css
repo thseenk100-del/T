@@ -700,3 +700,27 @@ h3::after{
 .scroll-btn.left{
   left:0;
 }
+/* توحيد ارتفاع الكروت */
+.product-card{
+  min-width:250px;
+  height:330px; /* ارتفاع ثابت */
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+/* توحيد شكل الصور */
+.product-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+/* تثبيت مساحة العنوان */
+.product-card h3{
+  font-size:15px;
+  line-height:1.5;
+  height:48px; /* مساحة ثابتة لسطرين */
+  overflow:hidden;
+}
