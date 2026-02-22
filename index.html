@@ -366,16 +366,6 @@ async function startSlider(img){
   },3000);
 }
 
-fetch("./data/products.json")
-.then(res => res.json())
-.then(products => {
-
-  // هنا كود بناء الأقسام
-
-  document.querySelectorAll(".product-thumb")
-          .forEach(img => startSlider(img));
-
-});
 
 </script>
 
