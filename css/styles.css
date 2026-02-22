@@ -772,3 +772,9 @@ h3::after{
   border-radius:14px;
   transition:opacity 0.4s ease;
 }
+.product-thumb{
+  display:block !important;
+  width:100% !important;
+  height:200px !important;
+  background:red;
+}
