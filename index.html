@@ -250,61 +250,63 @@ fetch("./data/products.json")
 .then(products => {
 
   const container = document.getElementById("categoriesContainer");
+  if(!container) return;
 
   const categories = {};
 
+  Object.entries(products).forEach(([id, product]) => {
+    if (!categories[product.category]) {
+      categories[product.category] = [];
+    }
+    categories[product.category].push({ id, ...product });
+  });
+
   Object.entries(categories).forEach(([categoryName, items]) => {
 
-  const section = document.createElement("div");
-  section.classList.add("category-section");
+    const section = document.createElement("div");
 
-  section.innerHTML = `
-    <div class="category-title">
-      <h2>${categoryName}</h2>
-    </div>
-
-    <div class="slider-wrapper">
-      <button class="scroll-btn right" onclick="scrollRight(this)">❮</button>
-
-      <div class="horizontal-scroll">
-        ${items.map(item => `
-          <div class="product-card">
-            <img src="assets/images/products/product${item.id}/1.webp" loading="lazy">
-            <h3>${item.name}</h3>
-            <a href="product.html?id=${item.id}" class="btn-primary">عرض التفاصيل</a>
-          </div>
-        `).join("")}
+    section.innerHTML = `
+      <div class="category-title">
+        <h2>${categoryName}</h2>
       </div>
 
-      <button class="scroll-btn left" onclick="scrollLeft(this)">❯</button>
-    </div>
-  `;
+      <div class="slider-wrapper">
+        <button class="scroll-btn right">❮</button>
 
-  container.appendChild(section);
-});
+        <div class="horizontal-scroll">
+          ${items.map(item => `
+            <div class="product-card">
+              <img src="assets/images/products/product${item.id}/1.webp" loading="lazy">
+              <h3>${item.name}</h3>
+              <a href="product.html?id=${item.id}" class="btn-primary">عرض التفاصيل</a>
+            </div>
+          `).join("")}
+        </div>
 
-});
+        <button class="scroll-btn left">❯</button>
+      </div>
+    `;
 
-function nextSlide(btn){
-  const slides = btn.parentElement.querySelector('.slides');
-  slides.appendChild(slides.firstElementChild);
-}
+    container.appendChild(section);
+  });
 
-function prevSlide(btn){
-  const slides = btn.parentElement.querySelector('.slides');
-  slides.prepend(slides.lastElementChild);
-}
+  document.querySelectorAll(".scroll-btn.left").forEach(btn=>{
+    btn.addEventListener("click", function(){
+      const scroll = this.parentElement.querySelector(".horizontal-scroll");
+      scroll.scrollBy({left:300, behavior:"smooth"});
+    });
+  });
+
+  document.querySelectorAll(".scroll-btn.right").forEach(btn=>{
+    btn.addEventListener("click", function(){
+      const scroll = this.parentElement.querySelector(".horizontal-scroll");
+      scroll.scrollBy({left:-300, behavior:"smooth"});
+    });
+  });
+
+})
+.catch(err => console.error("JSON Error:", err));
 </script>
-<script>
-function scrollLeft(btn){
-  const container = btn.parentElement.querySelector('.horizontal-scroll');
-  container.scrollBy({ left: -300, behavior: 'smooth' });
-}
-
-function scrollRight(btn){
-  const container = btn.parentElement.querySelector('.horizontal-scroll');
-  container.scrollBy({ left: 300, behavior: 'smooth' });
-}
-</script>
+  
 </body>
 </html>
