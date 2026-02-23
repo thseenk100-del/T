@@ -15,87 +15,6 @@
 .hero .overlay{
   background:rgba(0,0,0,0.65);
 }
-
-/* SERVICES SECTION */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-
-.service-card{
-  background:#fff;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
-  text-align:center;
-  transition:0.3s ease;
-}
-
-.service-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 50px rgba(0,108,53,0.15);
-}
-
-.service-price{
-  font-weight:700;
-  color:var(--primary);
-  margin:15px 0;
-}
-
-.service-card button{
-  background:linear-gradient(135deg,var(--primary-light),var(--primary));
-  border:none;
-  padding:10px 20px;
-  border-radius:30px;
-  color:#fff;
-  cursor:pointer;
-}
-
-/* CART */
-.cart-box{
-  position:fixed;
-  bottom:25px;
-  left:25px;
-  background:linear-gradient(135deg,var(--primary-light),var(--primary));
-  color:#fff;
-  padding:14px 22px;
-  border-radius:50px;
-  cursor:pointer;
-  z-index:1000;
-}
-
-.cart-panel{
-  position:fixed;
-  bottom:90px;
-  left:25px;
-  width:340px;
-  background:#fff;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.2);
-  display:none;
-}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  margin-bottom:10px;
-}
-
-/* TESTIMONIALS */
-.testimonials{
-  background:#f4f8f5;
-}
-
-.testimonial{
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
 </style>
 </head>
 
@@ -150,23 +69,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="container">
-    <h2 style="text-align:center;">آراء العملاء</h2>
-    <div class="services-grid">
-      <div class="testimonial">
-        <p>خدمة ممتازة وسرعة في التنفيذ. أنصح بها بشدة.</p>
-        <strong>— معلمة رياضيات</strong>
-      </div>
-      <div class="testimonial">
-        <p>ملف الإنجاز كان احترافي ومتقن جداً.</p>
-        <strong>— معلم لغة عربية</strong>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer class="footer">
   <div class="copyright">
     © 2026 تحسينك - جميع الحقوق محفوظة
@@ -191,7 +93,7 @@ function updateCart(){
   document.getElementById("cartCount").innerText = cart.length;
   let itemsHTML="";
   let total=0;
-  cart.forEach((item,index)=>{
+  cart.forEach((item)=>{
     total+=item.price;
     itemsHTML+=`<div class="cart-item">
     <span>${item.name}</span>
@@ -227,23 +129,7 @@ function sendOrder(){
 
 updateCart();
 </script>
-<!-- قسم الخدمات -->
-<section id="services">
-  <div class="container">
-    <div id="categoriesContainer"></div>
-  </div>
-</section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  ...
-</section>
-
-<footer class="footer">
-  ...
-</footer>
-
-<!-- هنا نضع كود الجافاسكربت -->
 <script>
 fetch("./data/products.json")
 .then(res => res.json())
@@ -266,51 +152,52 @@ fetch("./data/products.json")
     const section = document.createElement("div");
 
     section.innerHTML = `
-  <div class="category-title">
-    <h2>${categoryName}</h2>
-  </div>
+      <div class="category-title">
+        <h2>${categoryName}</h2>
+      </div>
 
-  <div class="slider-wrapper">
-    <button class="scroll-btn right">❮</button>
+      <div class="slider-wrapper">
+        <button class="scroll-btn right">❮</button>
 
-    <div class="horizontal-scroll">
-      ${items.map(item => `
-  <div class="product-card">
+        <div class="horizontal-scroll">
+          ${items.map(item => `
+            <div class="product-card">
 
-    <img 
-      class="product-thumb"
-      data-id="${item.id}"
-      alt="${item.name}"
-      loading="lazy"
-    >
+              <img 
+                class="product-thumb"
+                data-id="${item.id}"
+                alt="${item.name}"
+                loading="lazy"
+              >
 
-    <h3>${item.name}</h3>
+              <h3>${item.name}</h3>
 
-    <div class="product-actions">
+              <div class="product-actions">
+                <a href="product.html?id=${item.id}" class="btn-outline">
+                  عرض
+                </a>
 
-  <a href="product.html?id=${item.id}" class="btn-outline">
-    عرض
-  </a>
+                <a 
+                  href="https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب خدمة ${item.name} من موقعكم."
+                  target="_blank"
+                  class="btn-solid">
+                  اطلب الآن
+                </a>
+              </div>
 
-  <a 
-    href="https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب خدمة ${item.name} من موقعكم."
-    target="_blank"
-    class="btn-solid">
-    اطلب الآن
-  </a>
+            </div>
+          `).join("")}
+        </div>
 
-</div>
-`).join("")}
-    </div>
-
-    <button class="scroll-btn left">❯</button>
-  </div>
-`;
+        <button class="scroll-btn left">❯</button>
+      </div>
+    `;
 
     container.appendChild(section);
   });
-// تشغيل تقليب الصور بعد بناء البطاقات
-document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
+
+  document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
+
   document.querySelectorAll(".scroll-btn.left").forEach(btn=>{
     btn.addEventListener("click", function(){
       const scroll = this.parentElement.querySelector(".horizontal-scroll");
@@ -327,15 +214,10 @@ document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
 
 })
 .catch(err => console.error("JSON Error:", err));
-</script>
-<script>
 
 async function startSlider(img){
-
   const id = img.dataset.id;
-
   const basePath = `./images/products/product${id}/`;
-
   const firstImage = `${basePath}1.webp`;
   const secondImage = `${basePath}2.webp`;
 
@@ -345,53 +227,18 @@ async function startSlider(img){
   test.src = secondImage;
 
   test.onload = () => {
-
     let current = 1;
-
     setInterval(() => {
-
       current = current === 1 ? 2 : 1;
-
       img.style.opacity = 0;
-
       setTimeout(() => {
         img.src = `${basePath}${current}.webp`;
         img.style.opacity = 1;
       }, 200);
-
     }, 3000);
-
   };
-
 }
-
-
-fetch("./data/products.json")
-.then(res => res.json())
-.then(products => {
-
-  // بناء الأقسام
-
-  document.querySelectorAll(".product-thumb")
-    .forEach(img => startSlider(img));
-
-});
-/* ===== SHOW CART ONLY IN PRODUCTS PAGE ===== */
-document.addEventListener("DOMContentLoaded", function(){
-
-  const isHomePage = window.location.pathname.endsWith("index.html") 
-                     || window.location.pathname === "/T/" 
-                     || window.location.pathname.endsWith("/");
-
-  if(!isHomePage){
-    const cartBox = document.querySelector(".cart-box");
-    const cartPanel = document.querySelector(".cart-panel");
-
-    if(cartBox) cartBox.style.display = "none";
-    if(cartPanel) cartPanel.style.display = "none";
-  }
-
-});
 </script>
+
 </body>
 </html>
