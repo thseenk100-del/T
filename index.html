@@ -286,11 +286,20 @@ fetch("./data/products.json")
 
     <h3>${item.name}</h3>
 
-    <a href="product.html?id=${item.id}" class="btn-primary">
-      عرض التفاصيل
-    </a>
+    <div class="product-actions">
 
-  </div>
+  <a href="product.html?id=${item.id}" class="btn-outline">
+    عرض
+  </a>
+
+  <a 
+    href="https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب خدمة ${item.name} من موقعكم."
+    target="_blank"
+    class="btn-solid">
+    اطلب الآن
+  </a>
+
+</div>
 `).join("")}
     </div>
 
@@ -367,7 +376,22 @@ fetch("./data/products.json")
     .forEach(img => startSlider(img));
 
 });
+/* ===== SHOW CART ONLY IN PRODUCTS PAGE ===== */
+document.addEventListener("DOMContentLoaded", function(){
 
+  const isHomePage = window.location.pathname.endsWith("index.html") 
+                     || window.location.pathname === "/T/" 
+                     || window.location.pathname.endsWith("/");
+
+  if(!isHomePage){
+    const cartBox = document.querySelector(".cart-box");
+    const cartPanel = document.querySelector(".cart-panel");
+
+    if(cartBox) cartBox.style.display = "none";
+    if(cartPanel) cartPanel.style.display = "none";
+  }
+
+});
 </script>
 </body>
 </html>
