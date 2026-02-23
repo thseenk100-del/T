@@ -324,56 +324,50 @@ document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
 async function startSlider(img){
 
   const id = img.dataset.id;
-  const formats = ["webp","jpg","jpeg","png"];
-  const maxImages = 20;
 
-  let validImages = [];
-  let current = 0;
+  const basePath = `./images/products/product${id}/`;
 
-  function checkImage(src){
-    return new Promise(resolve=>{
-      const test = new Image();
-      test.src = src;
-      test.onload = ()=> resolve(src);
-      test.onerror = ()=> resolve(null);
-    });
-  }
+  const firstImage = `${basePath}1.webp`;
+  const secondImage = `${basePath}2.webp`;
 
-  for(let i=1; i<=maxImages; i++){
-    for(const ext of formats){
-      const path = `images/products/product${id}/${i}.${ext}`;
-      const exists = await checkImage(path);
-      if(exists) validImages.push(path);
-    }
-  }
+  img.src = firstImage;
 
-  if(validImages.length === 0) return;
+  const test = new Image();
+  test.src = secondImage;
 
-  img.src = validImages[0];
+  test.onload = () => {
 
-  if(validImages.length === 1) return;
+    let current = 1;
 
-  setInterval(() => {
+    setInterval(() => {
 
-  current = (current + 1) % validImages.length;
+      current = current === 1 ? 2 : 1;
 
-  const nextImage = new Image();
-  nextImage.src = validImages[current];
+      img.style.opacity = 0;
 
-  nextImage.onload = () => {
-    img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = `${basePath}${current}.webp`;
+        img.style.opacity = 1;
+      }, 200);
 
-    setTimeout(() => {
-      img.src = validImages[current];
-      img.style.opacity = 1;
-    }, 200);
+    }, 3000);
+
   };
 
-}, 3000);
 }
 
 
-</script>
+fetch("./data/products.json")
+.then(res => res.json())
+.then(products => {
 
+  // بناء الأقسام
+
+  document.querySelectorAll(".product-thumb")
+    .forEach(img => startSlider(img));
+
+});
+
+</script>
 </body>
 </html>
