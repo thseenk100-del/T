@@ -236,3 +236,39 @@ a{
   }
 
 }
+.product-actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.product-actions a{
+  flex:1;
+  padding:9px 0;
+  font-size:14px;
+  border-radius:12px;
+  font-weight:600;
+  text-align:center;
+  transition:0.3s;
+}
+
+.btn-outline{
+  border:2px solid #006C35;
+  background:#fff;
+  color:#006C35;
+}
+
+.btn-outline:hover{
+  background:#006C35;
+  color:#fff;
+}
+
+.btn-solid{
+  background:linear-gradient(135deg,#008753,#006C35);
+  color:#fff;
+}
+
+.btn-solid:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(0,108,53,0.25);
+}
