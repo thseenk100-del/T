@@ -216,26 +216,47 @@ fetch("./data/products.json")
 .catch(err => console.error("JSON Error:", err));
 
 async function startSlider(img){
+
   const id = img.dataset.id;
   const basePath = `./images/products/product${id}/`;
-  const firstImage = `${basePath}1.webp`;
-  const secondImage = `${basePath}2.webp`;
 
-  img.src = firstImage;
+  const formats = ["webp","jpg","jpeg","png"];
+  let images = [];
 
-  const test = new Image();
-  test.src = secondImage;
+  for(let i=1;i<=5;i++){
+    for(let ext of formats){
+      const path = `${basePath}${i}.${ext}`;
+      const test = new Image();
+      test.src = path;
 
-  test.onload = () => {
-    let current = 1;
-    setInterval(() => {
-      current = current === 1 ? 2 : 1;
-      img.style.opacity = 0;
-      setTimeout(() => {
-        img.src = `${basePath}${current}.webp`;
-        img.style.opacity = 1;
-      }, 200);
-    }, 3000);
+      await new Promise(resolve=>{
+        test.onload = () => { images.push(path); resolve(); };
+        test.onerror = () => resolve();
+      });
+    }
+  }
+
+  if(images.length === 0) return;
+
+  img.src = images[0];
+
+  if(images.length === 1) return;
+
+  let current = 0;
+
+  setInterval(()=>{
+    current = (current+1) % images.length;
+
+    img.style.opacity = 0;
+
+    setTimeout(()=>{
+      img.src = images[current];
+      img.style.opacity = 1;
+    },200);
+
+  },3000);
+}
+  
   };
 }
 </script>
