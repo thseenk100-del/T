@@ -1,7 +1,13 @@
 /* ===============================
    GLOBAL STYLES
 ================================= */
-
+:root{
+  --primary:#0B6B3A;
+  --primary-light:#0F8F4E;
+  --gold:#C9A227;
+  --bg-soft:#F6F8F7;
+  --text-dark:#1C1C1C;
+}
 *{
   margin:0;
   padding:0;
@@ -14,9 +20,9 @@ html{
 
 body{
   font-family:'Cairo',sans-serif;
-  line-height:1.8;
-  background:#ffffff;
-  color:#222;
+  line-height:1.9;
+  background:var(--bg-soft);
+  color:var(--text-dark);
 }
 
 .container{
@@ -40,11 +46,8 @@ a{
 ================================= */
 
 .navbar{
-  position:sticky;
-  top:0;
   background:#fff;
-  border-bottom:1px solid #eee;
-  z-index:999;
+  box-shadow:0 8px 25px rgba(0,0,0,0.05);
 }
 
 .nav-container{
@@ -67,6 +70,11 @@ a{
 
 .nav-links a{
   font-weight:600;
+  color:#333;
+}
+
+.nav-links a:hover{
+  color:var(--primary);
 }
 
 .nav-links a:hover{
@@ -94,19 +102,21 @@ a{
 ================================= */
 
 .hero{
-  height:80vh;
-  background:url('./images/hero.jpg') center/cover no-repeat;
+  height:85vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
+  color:#fff;
   position:relative;
 }
 
 .hero .overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.55);
+  background:linear-gradient(
+    135deg,
+    rgba(0,108,53,0.85),
+    rgba(0,0,0,0.75)
+  );
 }
 
 .hero-content{
@@ -156,33 +166,31 @@ a{
 ================================= */
 
 .product-card{
-  flex:0 0 270px;
+  flex:0 0 280px;
   background:#fff;
-  border-radius:18px;
-  padding:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
-  text-align:center;
-
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.05);
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-
-  transition:0.3s;
+  transition:0.35s ease;
+  border:1px solid rgba(0,0,0,0.03);
 }
 
 .product-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 45px rgba(0,0,0,0.12);
+  transform:translateY(-8px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.1);
 }
 
 /* صورة أطول بشكل احترافي */
 .product-thumb{
   width:100%;
-  aspect-ratio:3 / 4;   /* أطول قليلاً */
+  aspect-ratio:3/4;
   object-fit:cover;
-  border-radius:14px;
-  transition:opacity 0.4s ease;
-  display:block;
+  border-radius:16px;
+  margin-bottom:15px;
+  transition:0.4s ease;
 }
 
 /* تثبيت العنوان */
@@ -253,22 +261,58 @@ a{
 }
 
 .btn-outline{
-  border:2px solid #006C35;
+  border:2px solid var(--primary);
+  color:var(--primary);
   background:#fff;
-  color:#006C35;
+  border-radius:14px;
+  padding:8px 0;
+  font-weight:600;
 }
 
 .btn-outline:hover{
-  background:#006C35;
+  background:var(--primary);
   color:#fff;
 }
 
 .btn-solid{
-  background:linear-gradient(135deg,#008753,#006C35);
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
   color:#fff;
+  border-radius:14px;
+  padding:10px 0;
+  font-weight:600;
+}
+
+.btn-solid:hover{
+  box-shadow:0 10px 25px rgba(11,107,58,0.3);
+  transform:translateY(-2px);
 }
 
 .btn-solid:hover{
   transform:translateY(-2px);
   box-shadow:0 10px 20px rgba(0,108,53,0.25);
+}
+/* ===== HEADINGS IMPROVEMENT ===== */
+
+h1{
+  font-size:42px;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+
+h2{
+  font-size:28px;
+  font-weight:700;
+  color:var(--primary);
+  margin-bottom:15px;
+  position:relative;
+}
+
+h2::after{
+  content:"";
+  width:60px;
+  height:3px;
+  background:var(--gold);
+  display:block;
+  margin:10px auto 0;
+  border-radius:5px;
 }
