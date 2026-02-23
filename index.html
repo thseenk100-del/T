@@ -353,17 +353,23 @@ async function startSlider(img){
 
   if(validImages.length === 1) return;
 
-  setInterval(()=>{
-    current = (current + 1) % validImages.length;
+  setInterval(() => {
 
+  current = (current + 1) % validImages.length;
+
+  const nextImage = new Image();
+  nextImage.src = validImages[current];
+
+  nextImage.onload = () => {
     img.style.opacity = 0;
 
-    setTimeout(()=>{
+    setTimeout(() => {
       img.src = validImages[current];
       img.style.opacity = 1;
-    },200);
+    }, 200);
+  };
 
-  },3000);
+}, 3000);
 }
 
 
