@@ -60,26 +60,6 @@
 
   </div>
 </section>
-<!-- FEATURES -->
-<section class="features">
-  <div class="container features-grid">
-    <div class="feature">
-      <div class="icon">⚡</div>
-      <h3>تسليم سريع</h3>
-      <p>تنفيذ الطلبات خلال وقت قياسي</p>
-    </div>
-    <div class="feature">
-      <div class="icon">🎯</div>
-      <h3>جودة احترافية</h3>
-      <p>مطابقة لمعايير وزارة التعليم</p>
-    </div>
-    <div class="feature">
-      <div class="icon">💬</div>
-      <h3>دعم مباشر</h3>
-      <p>تواصل مباشر حتى اكتمال الخدمة</p>
-    </div>
-  </div>
-</section>
 
 <!-- SERVICES -->
 <section id="services">
@@ -87,7 +67,62 @@
     <div id="categoriesContainer"></div>
   </div>
 </section>
+<!-- WHY US -->
+<section class="why-us">
+  <div class="container">
+    <h2>لماذا تختار تحسينك؟</h2>
 
+    <div class="why-grid">
+
+      <div class="why-card fade-up">
+        <div class="why-icon">🎯</div>
+        <h3>مطابقة للمعايير الرسمية</h3>
+        <p>جميع الملفات معدة وفق متطلبات وزارة التعليم وأحدث النماذج المعتمدة.</p>
+      </div>
+
+      <div class="why-card fade-up">
+        <div class="why-icon">⚡</div>
+        <h3>تنفيذ سريع</h3>
+        <p>نلتزم بسرعة الإنجاز مع الحفاظ على أعلى مستوى من الجودة.</p>
+      </div>
+
+      <div class="why-card fade-up">
+        <div class="why-icon">🔒</div>
+        <h3>سرية تامة</h3>
+        <p>نحافظ على خصوصية جميع بيانات العملاء باحترافية كاملة.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+  <!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2>الأسئلة الشائعة</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">كم مدة تنفيذ الطلب؟</button>
+      <div class="faq-answer">
+        يتم تنفيذ معظم الطلبات خلال 24 – 48 ساعة حسب نوع الخدمة.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">كيف أستلم الملف؟</button>
+      <div class="faq-answer">
+        يتم إرسال الملفات عبر الواتساب أو رابط درايف حسب رغبتك.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">هل يمكن التعديل بعد التسليم؟</button>
+      <div class="faq-answer">
+        نعم، نتيح تعديلات بسيطة لضمان رضاك الكامل.
+      </div>
+    </div>
+
+  </div>
+</section>
 <footer class="footer">
   <div class="copyright">
     © 2026 تحسينك - جميع الحقوق محفوظة
@@ -300,6 +335,12 @@ function startSlider(img){
   tryNumber();
 }
 </script>
-
+<script>
+document.querySelectorAll(".faq-question").forEach(btn=>{
+  btn.addEventListener("click", function(){
+    this.nextElementSibling.classList.toggle("active");
+  });
+});
+    </script>
 </body>
 </html>
