@@ -159,11 +159,12 @@ fetch("./data/products.json")
             <div class="product-card">
 
               <img 
-                class="product-thumb"
-                data-id="${item.id}"
-                alt="${item.name}"
-                loading="lazy"
-              >
+  class="product-thumb"
+  data-id="${item.id}"
+  src="images/products/product${item.id}/1.webp"
+  alt="${item.name}"
+  loading="lazy"
+>
 
               <h3>${item.name}</h3>
 
