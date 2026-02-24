@@ -215,37 +215,25 @@ fetch("./data/products.json")
 })
 .catch(err => console.error("JSON Error:", err));
 
-async function startSlider(img){
+function startSlider(img){
 
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
-  const formats = ["webp","jpg","jpeg","png"];
-  let images = [];
-
-  for(let i=1;i<=5;i++){
-    for(let ext of formats){
-      const path = `${basePath}${i}.${ext}`;
-      const test = new Image();
-      test.src = path;
-
-      await new Promise(resolve=>{
-        test.onload = () => { images.push(path); resolve(); };
-        test.onerror = () => resolve();
-      });
-    }
-  }
-
-  if(images.length === 0) return;
+  const images = [
+    `${basePath}1.webp`,
+    `${basePath}2.webp`,
+    `${basePath}3.jpg`,
+    `${basePath}4.jpg`,
+    `${basePath}5.jpg`
+  ];
 
   img.src = images[0];
-
-  if(images.length === 1) return;
 
   let current = 0;
 
   setInterval(()=>{
-    current = (current+1) % images.length;
+    current = (current + 1) % images.length;
 
     img.style.opacity = 0;
 
@@ -255,8 +243,8 @@ async function startSlider(img){
     },200);
 
   },3000);
-}  
-
+}
+ 
 </script>
 
 </body>
