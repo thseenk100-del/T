@@ -210,20 +210,39 @@ fetch("./data/products.json")
 })
 .catch(err => console.error("JSON Error:", err));
 
-function startSlider(img){
+async function startSlider(img){
 
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
-  const images = [
-    `${basePath}1.webp`,
-    `${basePath}2.webp`,
-    `${basePath}3.jpg`,
-    `${basePath}4.jpg`,
-    `${basePath}5.jpg`
-  ];
+  const formats = ["webp","jpg","jpeg","png"];
+  let images = [];
+
+  // نبحث حتى 10 صور (يمكنك زيادة العدد)
+  for(let i=1;i<=10;i++){
+    for(let ext of formats){
+
+      const path = `${basePath}${i}.${ext}`;
+
+      const test = new Image();
+      test.src = path;
+
+      await new Promise(resolve=>{
+        test.onload = () => {
+          images.push(path);
+          resolve();
+        };
+        test.onerror = () => resolve();
+      });
+
+    }
+  }
+
+  if(images.length === 0) return;
 
   img.src = images[0];
+
+  if(images.length === 1) return;
 
   let current = 0;
 
