@@ -2,11 +2,11 @@
    GLOBAL STYLES
 ================================= */
 :root{
-  --primary:#0B6B3A;
-  --primary-light:#0F8F4E;
-  --gold:#C9A227;
-  --bg-soft:#F6F8F7;
-  --text-dark:#1C1C1C;
+  --primary:#1E5FA8;        /* أزرق رسمي */
+  --primary-light:#2C7BE5;  /* أزرق فاتح */
+  --accent:#0B6B3A;         /* أخضر تعليمي */
+  --bg-soft:#F7FAFC;        /* خلفية ناعمة */
+  --text-dark:#1F2937;      /* نص رسمي */
 }
 *{
   margin:0;
@@ -375,4 +375,66 @@ h2::after{
 .hero p{
   font-size:18px;
   opacity:0.9;
+}
+.why-us{
+  background:#ffffff;
+  padding:90px 0;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.why-card{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.04);
+  text-align:center;
+  transition:.35s ease;
+}
+
+.why-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.why-icon{
+  font-size:32px;
+  margin-bottom:15px;
+}.faq{
+  background:var(--bg-soft);
+  padding:90px 0;
+}
+
+.faq-item{
+  background:#fff;
+  margin-bottom:15px;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.faq-question{
+  width:100%;
+  padding:18px;
+  background:#fff;
+  border:none;
+  text-align:right;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.faq-answer{
+  padding:0 18px;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+.faq-answer.active{
+  padding:18px;
+  max-height:200px;
 }
