@@ -74,20 +74,20 @@
 
     <div class="why-grid">
 
-      <div class="why-card fade-up">
-        <div class="why-icon">🎯</div>
+     <div class="why-item reveal">
+        <div class="why-icon"></div>
         <h3>مطابقة للمعايير الرسمية</h3>
         <p>جميع الملفات معدة وفق متطلبات وزارة التعليم وأحدث النماذج المعتمدة.</p>
       </div>
 
-      <div class="why-card fade-up">
-        <div class="why-icon">⚡</div>
+ <div class="why-item reveal">
+        <div class="why-icon"></div>
         <h3>تنفيذ سريع</h3>
         <p>نلتزم بسرعة الإنجاز مع الحفاظ على أعلى مستوى من الجودة.</p>
       </div>
 
-      <div class="why-card fade-up">
-        <div class="why-icon">🔒</div>
+      <div class="why-item reveal">
+        <div class="why-icon"></div>
         <h3>سرية تامة</h3>
         <p>نحافظ على خصوصية جميع بيانات العملاء باحترافية كاملة.</p>
       </div>
@@ -342,5 +342,23 @@ document.querySelectorAll(".faq-question").forEach(btn=>{
   });
 });
     </script>
+  <script>
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+  const windowHeight = window.innerHeight;
+
+  reveals.forEach(el=>{
+    const elementTop = el.getBoundingClientRect().top;
+
+    if(elementTop < windowHeight - 80){
+      el.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+  </script>
 </body>
 </html>
