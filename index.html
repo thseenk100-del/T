@@ -217,30 +217,20 @@ function startSlider(img){
 
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
-
   const formats = ["webp","jpg","jpeg","png"];
 
   let images = [];
   let index = 1;
-  let failedAttempts = 0;
-  const maxFails = 5; // بعد 5 أرقام غير موجودة يتوقف
 
-  function checkImage(){
+  function tryNumber(){
 
     let formatIndex = 0;
 
-    function tryNextFormat(){
+    function tryFormat(){
 
       if(formatIndex >= formats.length){
-        failedAttempts++;
-        index++;
-
-        if(failedAttempts >= maxFails){
-          startLoop();
-        } else {
-          checkImage();
-        }
-
+        // لم نجد أي صيغة لهذا الرقم → نبدأ التقليب
+        startLoop();
         return;
       }
 
@@ -249,20 +239,19 @@ function startSlider(img){
 
       test.onload = function(){
         images.push(path);
-        failedAttempts = 0; // وجد صورة → إعادة العداد
         index++;
-        checkImage();
+        tryNumber();
       };
 
       test.onerror = function(){
         formatIndex++;
-        tryNextFormat();
+        tryFormat();
       };
 
       test.src = path;
     }
 
-    tryNextFormat();
+    tryFormat();
   }
 
   function startLoop(){
@@ -276,7 +265,6 @@ function startSlider(img){
     let current = 0;
 
     setInterval(()=>{
-
       current = (current + 1) % images.length;
 
       img.style.opacity = 0;
@@ -289,8 +277,8 @@ function startSlider(img){
     },3500);
   }
 
-  checkImage();
-                }
+  tryNumber();
+}
 </script>
 
 </body>
