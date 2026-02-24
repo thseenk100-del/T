@@ -212,53 +212,74 @@ fetch("./data/products.json")
 
 function startSlider(img){
 
+  // منع تشغيله مرتين
+  if(img.dataset.sliderStarted) return;
+  img.dataset.sliderStarted = "true";
+
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
   const formats = ["webp","jpg","jpeg","png"];
-  let images = [];
-  let maxImages = 10;
+  const maxImages = 10;
 
-  let loaded = 0;
+  let images = [];
 
   for(let i=1;i<=maxImages;i++){
     for(let ext of formats){
-
-      const path = `${basePath}${i}.${ext}`;
-      const test = new Image();
-
-      test.onload = function(){
-        images.push(path);
-        if(images.length === 1){
-          img.src = path; // أول صورة تظهر فورًا
-        }
-      };
-
-      test.src = path;
+      images.push(`${basePath}${i}.${ext}`);
     }
   }
 
-  // ننتظر نصف ثانية ثم نبدأ التقليب
-  setTimeout(()=>{
+  // نتحقق من الصور الموجودة فقط
+  let validImages = [];
+  let loadedCount = 0;
 
-    if(images.length <= 1) return;
+  images.forEach(src => {
+    const test = new Image();
+    test.onload = function(){
+      validImages.push(src);
+      loadedCount++;
+      if(loadedCount === images.length){
+        startAnimation();
+      }
+    };
+    test.onerror = function(){
+      loadedCount++;
+      if(loadedCount === images.length){
+        startAnimation();
+      }
+    };
+    test.src = src;
+  });
+
+  function startAnimation(){
+
+    if(validImages.length === 0) return;
+
+    // ترتيب الصور
+    validImages.sort();
+
+    img.src = validImages[0];
+
+    if(validImages.length === 1) return;
 
     let current = 0;
 
     setInterval(()=>{
-      current = (current + 1) % images.length;
 
+      current = (current + 1) % validImages.length;
+
+      img.style.transition = "opacity 0.5s ease";
       img.style.opacity = 0;
 
       setTimeout(()=>{
-        img.src = images[current];
+        img.src = validImages[current];
         img.style.opacity = 1;
-      },200);
+      },300);
 
-    },3000);
+    },3500);
 
-  },800);
-
+  }
 }
 </script>
 
