@@ -222,15 +222,25 @@ function startSlider(img){
 
   let images = [];
   let index = 1;
+  let failedAttempts = 0;
+  const maxFails = 5; // بعد 5 أرقام غير موجودة يتوقف
 
-  function tryFormats(){
+  function checkImage(){
 
     let formatIndex = 0;
 
     function tryNextFormat(){
 
       if(formatIndex >= formats.length){
-        startLoop();
+        failedAttempts++;
+        index++;
+
+        if(failedAttempts >= maxFails){
+          startLoop();
+        } else {
+          checkImage();
+        }
+
         return;
       }
 
@@ -239,8 +249,9 @@ function startSlider(img){
 
       test.onload = function(){
         images.push(path);
+        failedAttempts = 0; // وجد صورة → إعادة العداد
         index++;
-        tryFormats();
+        checkImage();
       };
 
       test.onerror = function(){
@@ -273,13 +284,13 @@ function startSlider(img){
       setTimeout(()=>{
         img.src = images[current];
         img.style.opacity = 1;
-      },300);
+      },250);
 
     },3500);
   }
 
-  tryFormats();
-}
+  checkImage();
+                }
 </script>
 
 </body>
