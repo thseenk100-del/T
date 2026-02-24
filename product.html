@@ -73,12 +73,36 @@ fetch("data/products.json")
     `https://wa.me/966551961517?text=أرغب بطلب ${product.name}`;
 
   const gallery=document.getElementById("gallery");
-  for(let i=1;i<=20;i++){
-    const img=document.createElement("img");
-    img.src=`assets/images/products/product${id}/${i}.jpg`;
-    img.loading="lazy";
-    gallery.appendChild(img);
+  const formats=["webp","jpg","jpeg","png"];
+
+for(let i=1;i<=20;i++){
+
+  let formatIndex=0;
+
+  function tryFormat(){
+
+    if(formatIndex>=formats.length) return;
+
+    const path=`images/products/product${id}/${i}.${formats[formatIndex]}`;
+    const test=new Image();
+
+    test.onload=function(){
+      const img=document.createElement("img");
+      img.src=path;
+      img.loading="lazy";
+      gallery.appendChild(img);
+    };
+
+    test.onerror=function(){
+      formatIndex++;
+      tryFormat();
+    };
+
+    test.src=path;
   }
+
+  tryFormat();
+}
 });
 </script>
 
