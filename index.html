@@ -6,21 +6,16 @@
 
 <title>تحسينك | ملفات إنجاز وأداء وظيفي للمعلمين في السعودية</title>
 
-<meta name="description" content="متجر خدمات تعليمية احترافية للمعلمين والمعلمات في السعودية. ملفات إنجاز، أداء وظيفي، وخطط تعليمية مع طلب مباشر عبر واتساب.">
-<meta name="keywords" content="ملف إنجاز معلم, سجل الأداء الوظيفي, ملفات نافس, خطط علاجية, خدمات تعليمية السعودية, سجل شواهد الأداء">
-
-<!-- Open Graph -->
-<meta property="og:title" content="تحسينك | ملفات إنجاز وأداء وظيفي للمعلمين">
-<meta property="og:description" content="طلب ملفات إنجاز وسجلات أداء وظيفي باحترافية وتسليم سريع عبر واتساب.">
-<meta property="og:image" content="https://thseenk100-del.github.io/T/images/hero.jpg">
-<meta property="og:type" content="website">
-
-<!-- Security -->
-<meta http-equiv="Content-Security-Policy"
-content="default-src 'self' https://wa.me https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+<meta name="description" content="متجر خدمات تعليمية احترافية للمعلمين والمعلمات في السعودية. ملفات إنجاز، أداء وظيفي، وتحضير دروس مع طلب مباشر عبر واتساب.">
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+
+<style>
+.hero .overlay{
+  background:rgba(0,0,0,0.65);
+}
+</style>
 </head>
 
 <body>
@@ -37,6 +32,7 @@ content="default-src 'self' https://wa.me https://fonts.googleapis.com https://f
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero" style="background:url('images/hero.jpg') center/cover no-repeat;">
   <div class="overlay"></div>
   <div class="hero-content">
@@ -45,6 +41,28 @@ content="default-src 'self' https://wa.me https://fonts.googleapis.com https://f
   </div>
 </section>
 
+<!-- FEATURES -->
+<section class="features">
+  <div class="container features-grid">
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <h3>تسليم سريع</h3>
+      <p>تنفيذ الطلبات خلال وقت قياسي</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🎯</div>
+      <h3>جودة احترافية</h3>
+      <p>مطابقة لمعايير وزارة التعليم</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💬</div>
+      <h3>دعم مباشر</h3>
+      <p>تواصل مباشر حتى اكتمال الخدمة</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
 <section id="services">
   <div class="container">
     <div id="categoriesContainer"></div>
@@ -68,8 +86,7 @@ content="default-src 'self' https://wa.me https://fonts.googleapis.com https://f
   <button onclick="sendOrder()">إرسال الطلب عبر واتساب</button>
 </div>
 
-<!-- CART SCRIPT -->
-<script defer>
+<script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCart(){
@@ -108,18 +125,20 @@ function sendOrder(){
 updateCart();
 </script>
 
-<!-- PRODUCTS SCRIPT -->
-<script defer>
-
-fetch("data/products.json")
+<script>
+fetch("./data/products.json")
 .then(res => res.json())
 .then(products => {
 
   const container = document.getElementById("categoriesContainer");
+  if(!container) return;
+
   const categories = {};
 
   Object.entries(products).forEach(([id, product]) => {
-    if (!categories[product.category]) categories[product.category] = [];
+    if (!categories[product.category]) {
+      categories[product.category] = [];
+    }
     categories[product.category].push({ id, ...product });
   });
 
@@ -138,17 +157,29 @@ fetch("data/products.json")
         <div class="horizontal-scroll">
           ${items.map(item => `
             <div class="product-card">
-              <img class="product-thumb"
-                   data-id="${item.id}"
-                   alt="${item.name}"
-                   loading="lazy">
+
+              <img 
+                class="product-thumb"
+                data-id="${item.id}"
+                alt="${item.name}"
+                loading="lazy"
+              >
+
               <h3>${item.name}</h3>
+
               <div class="product-actions">
-                <a href="product.html?id=${item.id}" class="btn-outline">عرض</a>
-                <a href="https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب خدمة ${item.name}"
-                   target="_blank"
-                   class="btn-solid">اطلب الآن</a>
+                <a href="product.html?id=${item.id}" class="btn-outline">
+                  عرض
+                </a>
+
+                <a 
+                  href="https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب خدمة ${item.name}"
+                  target="_blank"
+                  class="btn-solid">
+                  اطلب الآن
+                </a>
               </div>
+
             </div>
           `).join("")}
         </div>
@@ -160,37 +191,24 @@ fetch("data/products.json")
     container.appendChild(section);
   });
 
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const img = entry.target;
-        if(!img.dataset.started){
-          startSlider(img);
-          img.dataset.started="true";
-        }
-      }
-    });
-  },{threshold:0.5});
-
-  document.querySelectorAll(".product-thumb").forEach(img=>{
-    observer.observe(img);
-  });
+  document.querySelectorAll(".product-thumb").forEach(img => startSlider(img));
 
   document.querySelectorAll(".scroll-btn.left").forEach(btn=>{
     btn.addEventListener("click", function(){
-      this.parentElement.querySelector(".horizontal-scroll")
-      .scrollBy({left:300,behavior:"smooth"});
+      const scroll = this.parentElement.querySelector(".horizontal-scroll");
+      scroll.scrollBy({left:300, behavior:"smooth"});
     });
   });
 
   document.querySelectorAll(".scroll-btn.right").forEach(btn=>{
     btn.addEventListener("click", function(){
-      this.parentElement.querySelector(".horizontal-scroll")
-      .scrollBy({left:-300,behavior:"smooth"});
+      const scroll = this.parentElement.querySelector(".horizontal-scroll");
+      scroll.scrollBy({left:-300, behavior:"smooth"});
     });
   });
 
-});
+})
+.catch(err => console.error("JSON Error:", err));
 
 function startSlider(img){
 
@@ -210,15 +228,17 @@ function startSlider(img){
   let current = 0;
 
   setInterval(()=>{
-    current = (current+1)%images.length;
-    img.style.opacity=0;
+    current = (current + 1) % images.length;
+
+    img.style.opacity = 0;
+
     setTimeout(()=>{
       img.src = images[current];
-      img.style.opacity=1;
+      img.style.opacity = 1;
     },200);
-  },3500);
-}
 
+  },3000);
+}
 </script>
 
 </body>
