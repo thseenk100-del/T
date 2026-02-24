@@ -2,11 +2,13 @@
    GLOBAL STYLES
 ================================= */
 :root{
-  --primary:#1E5FA8;        /* أزرق رسمي */
-  --primary-light:#2C7BE5;  /* أزرق فاتح */
-  --accent:#0B6B3A;         /* أخضر تعليمي */
-  --bg-soft:#F7FAFC;        /* خلفية ناعمة */
-  --text-dark:#1F2937;      /* نص رسمي */
+  --primary:#006C35;
+  --primary-dark:#004B23;
+  --primary-light:#008753;
+  --accent:#C6A75E;
+  --bg-soft:#F8FAF9;
+  --text-dark:#1C1C1C;
+  --text-light:#555;
 }
 *{
   margin:0;
