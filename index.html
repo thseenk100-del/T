@@ -396,5 +396,18 @@ window.addEventListener("scroll", function(){
   </a>
 
 </div>
+  <script>
+window.addEventListener("scroll", function(){
+
+  const buttons = document.querySelector(".floating-buttons");
+
+  if(window.scrollY > 200){
+    buttons.classList.add("show");
+  } else {
+    buttons.classList.remove("show");
+  }
+
+});
+  </script>
 </body>
 </html>
