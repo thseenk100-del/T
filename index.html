@@ -210,53 +210,55 @@ fetch("./data/products.json")
 })
 .catch(err => console.error("JSON Error:", err));
 
-async function startSlider(img){
+function startSlider(img){
 
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
   const formats = ["webp","jpg","jpeg","png"];
   let images = [];
+  let maxImages = 10;
 
-  // نبحث حتى 10 صور (يمكنك زيادة العدد)
-  for(let i=1;i<=10;i++){
+  let loaded = 0;
+
+  for(let i=1;i<=maxImages;i++){
     for(let ext of formats){
 
       const path = `${basePath}${i}.${ext}`;
-
       const test = new Image();
+
+      test.onload = function(){
+        images.push(path);
+        if(images.length === 1){
+          img.src = path; // أول صورة تظهر فورًا
+        }
+      };
+
       test.src = path;
-
-      await new Promise(resolve=>{
-        test.onload = () => {
-          images.push(path);
-          resolve();
-        };
-        test.onerror = () => resolve();
-      });
-
     }
   }
 
-  if(images.length === 0) return;
+  // ننتظر نصف ثانية ثم نبدأ التقليب
+  setTimeout(()=>{
 
-  img.src = images[0];
+    if(images.length <= 1) return;
 
-  if(images.length === 1) return;
+    let current = 0;
 
-  let current = 0;
+    setInterval(()=>{
+      current = (current + 1) % images.length;
 
-  setInterval(()=>{
-    current = (current + 1) % images.length;
+      img.style.opacity = 0;
 
-    img.style.opacity = 0;
+      setTimeout(()=>{
+        img.src = images[current];
+        img.style.opacity = 1;
+      },200);
 
-    setTimeout(()=>{
-      img.src = images[current];
-      img.style.opacity = 1;
-    },200);
+    },3000);
 
-  },3000);
+  },800);
+
 }
 </script>
 
