@@ -212,64 +212,48 @@ fetch("./data/products.json")
 
 function startSlider(img){
 
-  // منع تشغيله مرتين
-  if(img.dataset.sliderStarted) return;
-  img.dataset.sliderStarted = "true";
+  if(img.dataset.started) return;
+  img.dataset.started = "true";
 
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
+  const images = [];
   const formats = ["webp","jpg","jpeg","png"];
-  const maxImages = 10;
 
-  let images = [];
-
-  for(let i=1;i<=maxImages;i++){
+  // نجمع الصور المتوقعة
+  for(let i=1;i<=10;i++){
     for(let ext of formats){
       images.push(`${basePath}${i}.${ext}`);
     }
   }
 
-  // نتحقق من الصور الموجودة فقط
   let validImages = [];
-  let loadedCount = 0;
+  let current = 0;
 
-  images.forEach(src => {
+  // نحاول تحميل الصور بدون إيقاف الصفحة
+  images.forEach(src=>{
     const test = new Image();
     test.onload = function(){
       validImages.push(src);
-      loadedCount++;
-      if(loadedCount === images.length){
-        startAnimation();
-      }
-    };
-    test.onerror = function(){
-      loadedCount++;
-      if(loadedCount === images.length){
-        startAnimation();
+
+      // أول صورة تظهر فورًا
+      if(validImages.length === 1){
+        img.src = src;
       }
     };
     test.src = src;
   });
 
-  function startAnimation(){
+  // نبدأ التقليب بعد 1 ثانية
+  setTimeout(()=>{
 
-    if(validImages.length === 0) return;
-
-    // ترتيب الصور
-    validImages.sort();
-
-    img.src = validImages[0];
-
-    if(validImages.length === 1) return;
-
-    let current = 0;
+    if(validImages.length <= 1) return;
 
     setInterval(()=>{
 
       current = (current + 1) % validImages.length;
 
-      img.style.transition = "opacity 0.5s ease";
       img.style.opacity = 0;
 
       setTimeout(()=>{
@@ -279,7 +263,7 @@ function startSlider(img){
 
     },3500);
 
-  }
+  },1000);
 }
 </script>
 
