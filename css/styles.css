@@ -2,13 +2,12 @@
    GLOBAL STYLES
 ================================= */
 :root{
-  --primary:#006C35;
-  --primary-dark:#004B23;
-  --primary-light:#008753;
-  --accent:#C6A75E;
-  --bg-soft:#F8FAF9;
+  --primary:#0E5F3C;
+  --primary-light:#177A50;
+  --primary-dark:#0A3E28;
+  --accent:#1E8F5A;
+  --bg-soft:#F4F6F5;
   --text-dark:#1C1C1C;
-  --text-light:#555;
 }
 *{
   margin:0;
@@ -52,7 +51,7 @@ a{
 ================================= */
 
 .navbar{
-  background:linear-gradient(135deg,#0B6B3A,#0F8F4E);
+  background:linear-gradient(135deg,var(--primary-dark),var(--primary-light));
   padding:20px 0;
   position:fixed;
   top:0;
@@ -321,13 +320,13 @@ a{
   border-radius:14px;
   padding:10px 0;
   font-weight:600;
+  transition:0.3s;
 }
 
 .btn-solid:hover{
-  box-shadow:0 10px 25px rgba(11,107,58,0.3);
-  transform:translateY(-2px);
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
-
 /* ===== HEADINGS IMPROVEMENT ===== */
 
 h1{
@@ -339,7 +338,7 @@ h1{
 h2{
   font-size:28px;
   font-weight:700;
-  color:var(--primary);
+  color:var(--primary-dark);
   margin-bottom:15px;
   position:relative;
 }
@@ -486,7 +485,9 @@ h2::after{
   opacity:1;
   transform:translateY(0);
 }
-
+.whatsapp-float{
+  background:#1E8F5A;
+}
 /* تأخير بسيط لكل عنصر */
 .reveal:nth-child(1){ transition-delay:.1s; }
 .reveal:nth-child(2){ transition-delay:.25s; }
