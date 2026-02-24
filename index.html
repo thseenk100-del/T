@@ -218,41 +218,56 @@ function startSlider(img){
   const id = img.dataset.id;
   const basePath = `images/products/product${id}/`;
 
-  const images = [];
   const formats = ["webp","jpg","jpeg","png"];
+  const maxImages = 10;
 
-  // نجمع الصور المتوقعة
-  for(let i=1;i<=10;i++){
+  let validImages = [];
+  let checks = 0;
+  let totalChecks = maxImages * formats.length;
+
+  for(let i=1;i<=maxImages;i++){
     for(let ext of formats){
-      images.push(`${basePath}${i}.${ext}`);
+
+      const path = `${basePath}${i}.${ext}`;
+      const test = new Image();
+
+      test.onload = function(){
+        validImages.push(path);
+        checks++;
+        if(checks === totalChecks){
+          startLoop();
+        }
+      };
+
+      test.onerror = function(){
+        checks++;
+        if(checks === totalChecks){
+          startLoop();
+        }
+      };
+
+      test.src = path;
     }
   }
 
-  let validImages = [];
-  let current = 0;
+  function startLoop(){
 
-  // نحاول تحميل الصور بدون إيقاف الصفحة
-  images.forEach(src=>{
-    const test = new Image();
-    test.onload = function(){
-      validImages.push(src);
+    if(validImages.length === 0) return;
 
-      // أول صورة تظهر فورًا
-      if(validImages.length === 1){
-        img.src = src;
-      }
-    };
-    test.src = src;
-  });
+    validImages.sort(); // ترتيب صحيح 1 ثم 2 ثم 3
 
-  // نبدأ التقليب بعد 1 ثانية
-  setTimeout(()=>{
+    let current = 0;
+    img.src = validImages[0];
 
-    if(validImages.length <= 1) return;
+    if(validImages.length === 1) return;
 
     setInterval(()=>{
 
-      current = (current + 1) % validImages.length;
+      current++;
+
+      if(current >= validImages.length){
+        current = 0; // يرجع لأول صورة بعد الأخيرة
+      }
 
       img.style.opacity = 0;
 
@@ -263,7 +278,7 @@ function startSlider(img){
 
     },3500);
 
-  },1000);
+  }
 }
 </script>
 
