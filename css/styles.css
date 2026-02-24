@@ -25,6 +25,10 @@ body{
   line-height:1.9;
   background:linear-gradient(to bottom,#f6f8f7,#ffffff);
   color:var(--text-dark);
+
+   body{
+  padding-top:90px;
+   
 }
 
 .container{
@@ -48,21 +52,33 @@ a{
 ================================= */
 
 .navbar{
-  background:#fff;
-  box-shadow:0 8px 25px rgba(0,0,0,0.05);
+  background:linear-gradient(135deg,#0B6B3A,#0F8F4E);
+  padding:20px 0;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  z-index:999;
+  transition:all 0.3s ease;
+}
+
+.navbar.scrolled{
+  padding:10px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 .nav-container{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  height:70px;
+  height:60px;
 }
 
 .logo{
   font-weight:700;
   font-size:20px;
-  color:#006C35;
+  color:#fff;
+  transition:0.3s;
 }
 
 .nav-links{
@@ -72,13 +88,14 @@ a{
 
 .nav-links a{
   font-weight:600;
-  color:#333;
+  color:#fff;
+  opacity:0.9;
+  transition:0.3s;
 }
 
 .nav-links a:hover{
-  color:var(--primary);
+  opacity:1;
 }
-
 /* ===============================
    BUTTONS
 ================================= */
