@@ -219,66 +219,66 @@ function startSlider(img){
   const basePath = `images/products/product${id}/`;
 
   const formats = ["webp","jpg","jpeg","png"];
-  const maxImages = 10;
 
-  let validImages = [];
-  let checks = 0;
-  let totalChecks = maxImages * formats.length;
+  let images = [];
+  let index = 1;
 
-  for(let i=1;i<=maxImages;i++){
-    for(let ext of formats){
+  function tryFormats(){
 
-      const path = `${basePath}${i}.${ext}`;
+    let formatIndex = 0;
+
+    function tryNextFormat(){
+
+      if(formatIndex >= formats.length){
+        startLoop();
+        return;
+      }
+
+      const path = `${basePath}${index}.${formats[formatIndex]}`;
       const test = new Image();
 
       test.onload = function(){
-        validImages.push(path);
-        checks++;
-        if(checks === totalChecks){
-          startLoop();
-        }
+        images.push(path);
+        index++;
+        tryFormats();
       };
 
       test.onerror = function(){
-        checks++;
-        if(checks === totalChecks){
-          startLoop();
-        }
+        formatIndex++;
+        tryNextFormat();
       };
 
       test.src = path;
     }
+
+    tryNextFormat();
   }
 
   function startLoop(){
 
-    if(validImages.length === 0) return;
+    if(images.length === 0) return;
 
-    validImages.sort(); // ترتيب صحيح 1 ثم 2 ثم 3
+    img.src = images[0];
+
+    if(images.length === 1) return;
 
     let current = 0;
-    img.src = validImages[0];
-
-    if(validImages.length === 1) return;
 
     setInterval(()=>{
 
-      current++;
-
-      if(current >= validImages.length){
-        current = 0; // يرجع لأول صورة بعد الأخيرة
-      }
+      current = (current + 1) % images.length;
 
       img.style.opacity = 0;
 
       setTimeout(()=>{
-        img.src = validImages[current];
+        img.src = images[current];
         img.style.opacity = 1;
       },300);
 
     },3500);
-
   }
+
+  tryFormats();
 }
 </script>
 
