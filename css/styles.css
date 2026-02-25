@@ -870,6 +870,20 @@ h2{
     height:20px;
   }
 }
+   /* ===============================
+   SMALLER PRODUCT BUTTONS
+================================= */
+
+.product-actions a{
+  font-size:12px;        /* تصغير الخط */
+  padding:6px 0;         /* تقليل الارتفاع */
+  border-radius:10px;    /* حواف أصغر قليلاً */
+}
+
+.btn-outline,
+.btn-solid{
+  padding:6px 0;
+}
 /* ===============================
    REVEAL DELAY
 ================================= */
