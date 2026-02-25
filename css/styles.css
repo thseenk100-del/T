@@ -598,62 +598,38 @@ h1{
 h2{
   font-size:30px;
 }
-.horizontal-scroll{
-  display:flex;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-
-   /* ===============================
-   PROFESSIONAL CARD LAYOUT FINAL
+/* ===============================
+   FINAL CLEAN CARD LAYOUT
 ================================= */
 
-/* الحاوية البيضاء حول السلايدر */
-#services .container{
-  background:#ffffff;
-  padding:60px;
-  border-radius:24px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.06);
-}
-
-/* السلايدر */
 .horizontal-scroll{
   display:flex;
-  gap:25px;
+  gap:20px;
   overflow-x:auto;
   scroll-behavior:smooth;
-  padding:20px 10px;
+  padding:15px 20px;
 }
 
-/* إخفاء شريط التمرير */
 .horizontal-scroll::-webkit-scrollbar{
   display:none;
 }
 
-/* الكمبيوتر – يظهر تقريبًا 3 بطاقات ونصف */
+/* الكمبيوتر */
 .product-card{
-  flex:0 0 30%;
-  background:#fff;
-  border-radius:22px;
-  padding:18px;
-  box-shadow:0 20px 45px rgba(0,0,0,0.07);
-  transition:0.3s ease;
+  flex:0 0 28%;
 }
 
 /* تابلت */
 @media(max-width:992px){
   .product-card{
-    flex:0 0 45%;
+    flex:0 0 40%;
   }
 }
 
-/* الجوال – يظهر بطاقتين ونصف */
+/* الجوال */
 @media(max-width:768px){
   .product-card{
-    flex:0 0 65%;
-  }
-
-  .horizontal-scroll{
-    padding:15px;
+    flex:0 0 46%;
   }
 }
 /* ===== FINAL CARD SIZE LIKE IMAGE ===== */
