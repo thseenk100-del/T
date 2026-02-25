@@ -814,6 +814,9 @@ h2{
 .product-actions{
   padding:0 20px 20px;
 }
+   .product-thumb{
+  transition:opacity 0.7s ease;
+   }
 /* ===============================
    REVEAL DELAY
 ================================= */
