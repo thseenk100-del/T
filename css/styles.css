@@ -24,10 +24,7 @@ body{
   line-height:1.9;
   background:linear-gradient(to bottom,#f6f8f7,#ffffff);
   color:var(--text-dark);
-
-   body{
   padding-top:90px;
-   
 }
 
 .container{
@@ -884,6 +881,14 @@ h2{
 .btn-solid{
   padding:6px 0;
 }
+   @media(max-width:768px){
+
+  .product-actions a{
+    font-size:11px;
+    padding:5px 0;
+  }
+
+   }
 /* ===============================
    REVEAL DELAY
 ================================= */
