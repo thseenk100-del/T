@@ -723,6 +723,35 @@ h2{
 .product-actions{
   margin-top:15px;
 }
+   /* ===============================
+   FULL IMAGE CARD STYLE
+================================= */
+
+/* إزالة padding من البطاقة */
+.product-card{
+  padding:0;
+  overflow:hidden;
+}
+
+/* الصورة تملأ كامل عرض البطاقة */
+.product-thumb{
+  width:100%;
+  height:280px; /* يمكنك تعديل الطول */
+  object-fit:cover;
+  border-radius:0;
+  display:block;
+}
+
+/* محتوى البطاقة تحت الصورة */
+.product-card h3,
+.product-actions{
+  padding:15px 18px;
+}
+
+/* تحسين توزيع الأزرار */
+.product-actions{
+  padding-bottom:20px;
+}
 /* ===============================
    REVEAL DELAY
 ================================= */
