@@ -599,7 +599,11 @@ h1{
 h2{
   font-size:30px;
 }
-
+.horizontal-scroll{
+  display:flex;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+}
 /* ===============================
    RESPONSIVE HEADINGS
 ================================= */
@@ -653,15 +657,22 @@ h2{
   }
 }
 
-/* الجوال – 2.5 بطاقة */
+/* الجوال – 2.5 بطاقة احترافية */
 @media(max-width:768px){
-  .product-card{
-    flex:0 0 45%;
-  }
 
   .horizontal-scroll{
-    padding:10px 15px;
+    padding:10px 10px;
+    gap:14px;
   }
+
+  .product-card{
+    flex:0 0 42%;
+  }
+
+  .product-thumb{
+    height:250px;
+  }
+
 }
 
 /* ===============================
@@ -690,10 +701,3 @@ h2{
 .reveal:nth-child(3){ transition-delay:.4s; }
 .reveal:nth-child(4){ transition-delay:.55s; }
 .reveal:nth-child(5){ transition-delay:.7s; }
-/* تأخير بسيط لكل عنصر */
-.reveal:nth-child(1){ transition-delay:.1s; }
-.reveal:nth-child(2){ transition-delay:.25s; }
-.reveal:nth-child(3){ transition-delay:.4s; }
-.reveal:nth-child(4){ transition-delay:.55s; }
-.reveal:nth-child(5){ transition-delay:.7s; }
-
