@@ -403,6 +403,14 @@ h2::after{
    WHY US CLEAN STYLE
 ================================= */
 
+.features{
+  background: linear-gradient(
+    to bottom,
+    #f6f8f7,
+    #ffffff
+  );
+  padding:80px 0;
+}
 .why-us{
   background:#ffffff;
   padding:90px 0;
