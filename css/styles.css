@@ -560,7 +560,11 @@ h2::after{
   overflow:hidden;
   transition:all .3s ease;
 }
-
+.product-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
 .product-card:hover{
   transform:translateY(-8px);
   box-shadow:var(--shadow-md);
@@ -576,7 +580,7 @@ h2::after{
 /* جوال — بطاقتين ونص */
 @media(max-width:768px){
   .product-card{
-    flex:0 0 48%;
+    flex:0 0 calc(50% - 10px);
   }
 }
 
@@ -634,7 +638,7 @@ h2::after{
 
   /* تقليل ارتفاع الصورة */
   .product-thumb{
-    height:220px;
+    height:200px;
   }
 
   /* تقليل المسافات */
@@ -643,9 +647,9 @@ h2::after{
   }
 
   .horizontal-scroll{
-    gap:15px;
-    padding:10px 8px;
-  }
+  gap:12px;
+  padding:10px 12px;
+}
 
   /* تصغير أزرار واتساب وتليجرام العائمة */
   .float-btn{
