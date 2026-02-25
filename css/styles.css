@@ -661,6 +661,28 @@ h2{
     flex:0 0 46%;
   }
 }
+/* ===== OPEN CARD STYLE ===== */
+
+.product-card{
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  border:none; /* إزالة الإطار */
+  box-shadow:0 8px 25px rgba(0,0,0,0.05); /* ظل أخف */
+}
+
+/* مسافة تنفس أكبر */
+.horizontal-scroll{
+  gap:30px;
+  padding:20px 10px;
+}
+
+/* إزالة الإطار من الحاوية البيضاء */
+#services .container{
+  box-shadow:none;
+  background:transparent;
+}
+
 /* ===============================
    REVEAL DELAY
 ================================= */
