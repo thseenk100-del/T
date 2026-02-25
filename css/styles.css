@@ -656,7 +656,35 @@ h2{
     padding:15px;
   }
 }
+/* ===== FINAL CARD SIZE LIKE IMAGE ===== */
 
+/* السلايدر */
+.horizontal-scroll{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:15px 20px;
+}
+
+/* الكمبيوتر – 3 بطاقات تقريبًا */
+.product-card{
+  flex:0 0 28%;
+}
+
+/* تابلت */
+@media(max-width:992px){
+  .product-card{
+    flex:0 0 40%;
+  }
+}
+
+/* الجوال – بطاقتين ونص */
+@media(max-width:768px){
+  .product-card{
+    flex:0 0 46%;
+  }
+}
 /* ===============================
    REVEAL DELAY
 ================================= */
