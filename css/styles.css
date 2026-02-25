@@ -603,93 +603,58 @@ h2{
   display:flex;
   overflow-x:auto;
   scroll-behavior:smooth;
-}
-/* ===============================
-   RESPONSIVE HEADINGS
-================================= */
-@media(max-width:992px){
-  h1{ font-size:34px; }
-  h2{ font-size:26px; }
-}
 
-@media(max-width:768px){
-  h1{ font-size:26px; }
-  h2{ font-size:22px; }
-}
-
-/* ===============================
-   RESPONSIVE SECTIONS
-================================= */
-@media(max-width:992px){
-  .features .container,
-  #services .container,
-  .faq-section .container{
-    padding:40px;
-  }
-}
-
-@media(max-width:768px){
-  section{
-    padding:80px 0;
-  }
-
-  .features .container,
-  #services .container,
-  .faq-section .container{
-    padding:25px;
-    border-radius:18px;
-  }
-}
-
-/* ===============================
-   PROFESSIONAL CARD LAYOUT
+   /* ===============================
+   PROFESSIONAL CARD LAYOUT FINAL
 ================================= */
 
-/* الكمبيوتر – 3.5 بطاقة */
+/* الحاوية البيضاء حول السلايدر */
+#services .container{
+  background:#ffffff;
+  padding:60px;
+  border-radius:24px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.06);
+}
+
+/* السلايدر */
+.horizontal-scroll{
+  display:flex;
+  gap:25px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:20px 10px;
+}
+
+/* إخفاء شريط التمرير */
+.horizontal-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+/* الكمبيوتر – يظهر تقريبًا 3 بطاقات ونصف */
 .product-card{
-  flex:0 0 28%;
+  flex:0 0 30%;
+  background:#fff;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.07);
+  transition:0.3s ease;
 }
 
 /* تابلت */
 @media(max-width:992px){
   .product-card{
-    flex:0 0 40%;
+    flex:0 0 45%;
   }
 }
 
-/* الجوال – 2.5 بطاقة احترافية */
+/* الجوال – يظهر بطاقتين ونصف */
 @media(max-width:768px){
+  .product-card{
+    flex:0 0 65%;
+  }
 
   .horizontal-scroll{
-    padding:10px 10px;
-    gap:14px;
-  }
-
-  .product-card{
-    flex:0 0 42%;
-  }
-
-  .product-thumb{
-    height:250px;
-  }
-
-}
-
-/* ===============================
-   FAQ MOBILE
-================================= */
-@media(max-width:768px){
-  .faq-question{
-    font-size:15px;
-    padding:18px;
-  }
-
-  .faq-answer{
-    font-size:14px;
-  }
-
-  .slider-wrapper{
-    overflow:hidden;
+    padding:15px;
   }
 }
 
