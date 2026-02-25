@@ -429,5 +429,18 @@ window.addEventListener("scroll", function(){
 
 });
   </script>
+  <script>
+document.querySelectorAll(".faq-question").forEach(item=>{
+  item.addEventListener("click", function(){
+
+    const parent=this.parentElement;
+    parent.classList.toggle("active");
+
+    const icon=this.querySelector(".faq-icon");
+    icon.innerText = parent.classList.contains("active") ? "−" : "+";
+
+  });
+});
+  </script>
 </body>
 </html>
