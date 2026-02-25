@@ -429,18 +429,24 @@ window.addEventListener("scroll", function(){
 
 });
   </script>
-  <script>
-document.querySelectorAll(".faq-question").forEach(item=>{
-  item.addEventListener("click", function(){
+  <!-- FAQ SCRIPT -->
+<script>
+document.querySelectorAll(".faq-question").forEach(question=>{
+  question.addEventListener("click", function(){
 
-    const parent=this.parentElement;
-    parent.classList.toggle("active");
+    const item = this.parentElement;
 
-    const icon=this.querySelector(".faq-icon");
-    icon.innerText = parent.classList.contains("active") ? "−" : "+";
+    document.querySelectorAll(".faq-item").forEach(i=>{
+      if(i !== item){
+        i.classList.remove("active");
+      }
+    });
+
+    item.classList.toggle("active");
 
   });
 });
-  </script>
+</script>
+
 </body>
 </html>
