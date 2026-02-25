@@ -682,7 +682,47 @@ h2{
   box-shadow:none;
   background:transparent;
 }
+/* ===============================
+   CLEAN OPEN CARD STYLE
+================================= */
 
+/* إزالة أي ظل أو إطار */
+.product-card{
+  background:#ffffff;
+  border:none;
+  box-shadow:none;
+  border-radius:18px;
+  padding:20px;
+}
+
+/* إلغاء أي ظل عند hover */
+.product-card:hover{
+  transform:none;
+  box-shadow:none;
+}
+
+/* مسافة مريحة بين البطاقات */
+.horizontal-scroll{
+  gap:35px;
+  padding:25px 15px;
+}
+
+/* إزالة ظل الحاوية البيضاء */
+#services .container{
+  background:transparent;
+  box-shadow:none;
+  padding:40px 0;
+}
+
+/* تحسين مظهر الصورة */
+.product-thumb{
+  border-radius:14px;
+}
+
+/* تحسين تباعد الأزرار */
+.product-actions{
+  margin-top:15px;
+}
 /* ===============================
    REVEAL DELAY
 ================================= */
