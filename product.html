@@ -4,292 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تفاصيل الخدمة | تحسينك</title>
+<meta name="description" content="تفاصيل الخدمة والملف التعليمي من تحسينك، مع الصور والوصف وطريقة الطلب.">
+<meta name="theme-color" content="#0b3327">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-
 <style>
-
-/* ===== PAGE LAYOUT ===== */
-.product-wrapper{
-  max-width:1000px;
-  margin:auto;
-  padding:60px 20px;
-}
-
-.product-title{
-  font-size:28px;
-  font-weight:700;
-  margin-bottom:15px;
-}
-
-.product-price{
-  font-size:20px;
-  color:#0B6B3A;
-  font-weight:700;
-  margin-bottom:20px;
-}
-
-.product-description{
-  line-height:1.9;
-  margin-bottom:40px;
-}
-
-/* ===== IMAGE SECTION ===== */
-
-.main-image{
-  width:100%;
-  max-height:600px;
-  height:auto;
-  object-fit:contain;
-  border-radius:20px;
-  cursor:pointer;
-  box-shadow:0 20px 50px rgba(0,0,0,0.1);
-  margin-bottom:25px;
-  background:#f5f5f5;
-}
-
-.thumb-gallery{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-}
-
-.thumb-gallery img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:12px;
-  cursor:pointer;
-  opacity:0.7;
-  transition:0.3s;
-}
-
-.thumb-gallery img:hover{
-  opacity:1;
-  transform:scale(1.05);
-}
-
-/* ===== LIGHTBOX ===== */
-
-.lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
-}
-
-.lightbox img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:20px;
-}
-
-.lightbox.close{
-  cursor:pointer;
-}
-
-/* ===== ACTION BUTTONS ===== */
-
-.actions{
-  margin-top:40px;
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.actions a{
-  flex:1;
-  text-align:center;
-  padding:14px;
-  border-radius:30px;
-  font-weight:700;
-  text-decoration:none;
-}
-
-.whatsapp-btn{
-  background:#0B6B3A;
-  color:#fff;
-}
-
-.telegram-btn{
-  background:#0088cc;
-  color:#fff;
-}
-
-/* ===== FIXED WHATSAPP BAR ===== */
-
-.fixed-order{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#0B6B3A;
-  color:#fff;
-  text-align:center;
-  padding:15px;
-  font-weight:700;
-  z-index:1500;
-}
-
-.fixed-order a{
-  color:#fff;
-  text-decoration:none;
-  display:block;
-}
-
-@media(max-width:768px){
-  .main-image{
-    height:300px;
-  }
-}
-/* ===== FLOATING SOCIAL BUTTONS ===== */
-
-.floating-buttons{
-  position:fixed;
-  bottom:25px;
-  left:25px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:3000;
-}
-
-.float-btn{
-  width:52px;
-  height:52px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  transition:0.3s ease;
-}
-
-.float-btn img{
-  width:26px;
-  height:26px;
-}
-
-.float-btn:hover{
-  transform:translateY(-4px);
-}
-
-.whatsapp-float{
-  background:#25D366;
-}
-
-.telegram-float{
-  background:#0088cc;
-}
+.product-page{padding:72px 0 120px;background:var(--bg);}
+.product-breadcrumb{width:min(92%,1200px);margin:0 auto 34px;color:var(--muted);font-size:13px;}
+.product-breadcrumb a{color:var(--primary-2);}.product-breadcrumb span{padding:0 8px;color:var(--accent);}
+.product-layout{width:min(92%,1200px);margin:auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:72px;align-items:start;}
+.product-visual{position:sticky;top:120px;}
+.main-image{width:100%;height:min(66vh,620px);object-fit:contain;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:none;cursor:zoom-in;}
+.thumb-gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;overflow:visible;}
+.thumb-gallery img{width:100%;height:72px;object-fit:cover;border:1px solid transparent;border-radius:var(--radius-sm);opacity:.62;cursor:pointer;transition:opacity .25s ease,border-color .25s ease,transform .25s ease;}
+.thumb-gallery img:hover,.thumb-gallery img.active{opacity:1;border-color:var(--accent);transform:translateY(-2px);}
+.product-copy{padding-top:18px;}.product-kicker{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.04em;margin-bottom:14px;}.product-title{font-size:clamp(30px,4vw,52px);line-height:1.25;letter-spacing:-1.5px;color:var(--primary);margin-bottom:18px;}.product-description{color:var(--muted);font-size:16px;line-height:2;max-width:52ch;margin-bottom:28px;}.product-price{font-size:28px;color:var(--primary);font-weight:700;margin-bottom:26px;}.product-price small{font-size:13px;color:var(--muted);font-weight:400;margin-right:6px;}.product-meta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:26px 0;padding:18px 0;gap:16px;}.product-meta div{display:grid;gap:4px;}.product-meta strong{font-size:13px;color:var(--primary);}.product-meta span{font-size:12px;color:var(--muted);}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}.actions a{display:grid;place-items:center;min-height:48px;padding:12px 14px;border-radius:var(--radius-sm);font-weight:700;text-align:center;}.whatsapp-btn{background:var(--primary);color:#fff;}.telegram-btn{border:1px solid var(--primary);color:var(--primary);}.actions a:hover{transform:translateY(-2px);}.trust-note{display:flex;gap:10px;align-items:start;border-top:1px solid var(--line);margin-top:28px;padding-top:18px;color:var(--muted);font-size:12px;line-height:1.8;}.trust-mark{width:9px;height:9px;flex:0 0 9px;background:var(--accent);transform:rotate(45deg);margin-top:7px;}.lightbox{position:fixed;inset:0;background:rgba(7,28,21,.94);display:none;align-items:center;justify-content:center;z-index:2000;padding:24px;}.lightbox img{max-width:min(92vw,1000px);max-height:86vh;border-radius:var(--radius-md);}.lightbox-close{position:absolute;top:24px;left:28px;color:#fff;background:transparent;border:0;font-size:30px;cursor:pointer;}.floating-buttons{position:fixed;left:22px;bottom:22px;display:flex;flex-direction:column;gap:10px;z-index:1200;}.float-btn{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-soft);}.whatsapp-float{background:#168557;}.telegram-float{background:#237da5;}.float-btn svg{width:22px;height:22px;}
+@media(max-width:768px){.product-page{padding-top:44px;}.product-layout{grid-template-columns:1fr;gap:36px;}.product-visual{position:static;}.main-image{height:360px;}.thumb-gallery{grid-template-columns:repeat(5,1fr);}.thumb-gallery img{height:62px;}.product-title{font-size:34px;}.actions{grid-template-columns:1fr;}.floating-buttons{left:14px;bottom:14px;}}
 </style>
 </head>
-
 <body>
-
-<div class="product-wrapper">
-
-  <h1 id="productName" class="product-title"></h1>
-  <div id="productPrice" class="product-price"></div>
-  <p id="productDescription" class="product-description"></p>
-
-  <img id="mainImage" class="main-image">
-
-  <div id="thumbGallery" class="thumb-gallery"></div>
-
-  <div class="actions">
-    <a id="orderBtn" class="whatsapp-btn" target="_blank">طلب عبر واتساب</a>
-    <a href="https://t.me/Tahsenk" target="_blank" class="telegram-btn">قناة تيليجرام</a>
+<header class="navbar">
+  <div class="container nav-container">
+    <a class="logo" href="index.html" aria-label="العودة إلى الرئيسية"><span>تحسينك</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false" type="button">القائمة</button>
+    <nav class="nav-links" id="siteNav">
+      <a href="index.html">الرئيسية</a><a href="services.html">الخدمات</a><a href="products.html" aria-current="page">الملفات</a><a href="contact.html">تواصل معنا</a>
+    </nav>
   </div>
-
-</div>
-
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <img id="lightboxImg">
-</div>
-
-
-
+</header>
+<main class="product-page">
+  <div class="product-breadcrumb"><a href="index.html">الرئيسية</a><span>/</span><a href="products.html">الملفات</a><span>/</span><strong id="breadcrumbName">تفاصيل الخدمة</strong></div>
+  <div class="product-layout">
+    <section class="product-visual" aria-label="صور المنتج"><img id="mainImage" class="main-image" alt="صورة الخدمة" loading="eager"><div id="thumbGallery" class="thumb-gallery"></div></section>
+    <section class="product-copy" aria-labelledby="productName">
+      <p id="productCategory" class="product-kicker">خدمة تعليمية</p><h1 id="productName" class="product-title">جاري تحميل التفاصيل</h1><p id="productDescription" class="product-description">نجهز تفاصيل الخدمة والصور المتاحة...</p><div id="productPrice" class="product-price"><small>يبدأ من</small> —</div>
+      <div class="product-meta"><div><strong>طريقة التسليم</strong><span>ملف منسق قابل للتعديل</span></div><div><strong>الاستجابة</strong><span>تواصل مباشر عبر واتساب</span></div></div>
+      <div class="actions"><a id="orderBtn" class="whatsapp-btn" target="_blank" rel="noreferrer">اطلب هذه الخدمة</a><a href="https://t.me/Tahsenk" target="_blank" rel="noreferrer" class="telegram-btn">تواصل عبر تيليجرام</a></div>
+      <div class="trust-note"><span class="trust-mark"></span><span>نراجع متطلباتك قبل التنفيذ، ونحافظ على وضوح الملف وسهولة تعديله بعد الاستلام.</span></div>
+    </section>
+  </div>
+</main>
+<div id="lightbox" class="lightbox" role="dialog" aria-label="عرض الصورة" aria-modal="true"><button class="lightbox-close" type="button" onclick="closeLightbox()" aria-label="إغلاق الصورة">×</button><img id="lightboxImg" alt="عرض مكبر للصورة"></div>
+<div class="floating-buttons"><a id="floatWhatsapp" class="float-btn whatsapp-float" target="_blank" rel="noreferrer" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.7 11.7 0 0 0 12.1 0C5.5 0 .1 5.4.1 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6a12 12 0 0 0 5.8 1.5h.1C18.7 23.9 24 18.6 24 12c0-3.2-1.2-6.2-3.5-8.5Z"/></svg></a><a href="https://t.me/Tahsenk" target="_blank" rel="noreferrer" class="float-btn telegram-float" aria-label="تيليجرام"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m21.8 3.1-3 16.8c-.2 1.2-.9 1.5-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2L6.8 13.2l-5.1-1.6c-1.1-.4-1.1-1.1.2-1.6L21.1 2c1-.4 1.9.2.7 1.1Z"/></svg></a></div>
+<script src="js/main.js"></script>
 <script>
-
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get("id");
-
-fetch("data/products.json")
-.then(res=>res.json())
-.then(data=>{
-
-  const product=data[id];
-  if(!product) return;
-
-  document.getElementById("productName").innerText=product.name;
-  document.getElementById("productDescription").innerText=product.description;
-  document.getElementById("productPrice").innerText=product.price + " ريال";
-
-const waLink=`https://wa.me/966551961517?text=السلام عليكم، أرغب بطلب ${product.name}`;
-document.getElementById("orderBtn").href=waLink;
-document.getElementById("floatWhatsapp").href = waLink;  
-
-  const mainImage=document.getElementById("mainImage");
-  const gallery=document.getElementById("thumbGallery");
-
-  const formats=["webp","jpg","jpeg","png"];
-  const basePath=`images/products/product${id}/`;
-
-  let firstImageSet=false;
-
-  for(let i=1;i<=20;i++){
-
-    formats.forEach(ext=>{
-      const path=`${basePath}${i}.${ext}`;
-      const test=new Image();
-
-      test.onload=function(){
-
-        if(!firstImageSet){
-          mainImage.src=path;
-          firstImageSet=true;
-        }
-
-        const thumb=document.createElement("img");
-        thumb.src=path;
-        thumb.onclick=function(){
-          mainImage.src=path;
-        };
-
-        gallery.appendChild(thumb);
-      };
-
-      test.src=path;
-    });
-
-  }
-
-});
-
-function closeLightbox(){
-  document.getElementById("lightbox").style.display="none";
-}
-
-document.getElementById("mainImage").onclick=function(){
-  const lightbox=document.getElementById("lightbox");
-  const img=document.getElementById("lightboxImg");
-  img.src=this.src;
-  lightbox.style.display="flex";
-};
-
+const id=new URLSearchParams(location.search).get('id');
+const fallback='images/products/product1/1.webp';
+const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+fetch('data/products.json').then(response=>{if(!response.ok)throw new Error('تعذر تحميل البيانات');return response.json();}).then(data=>{const product=data[id];if(!product)throw new Error('الخدمة غير موجودة');document.title=product.name+' | تحسينك';document.getElementById('productName').textContent=product.name;document.getElementById('breadcrumbName').textContent=product.name;document.getElementById('productCategory').textContent=product.category;document.getElementById('productDescription').textContent=product.description;document.getElementById('productPrice').innerHTML='<small>السعر</small> '+product.price+' ريال';const wa='https://wa.me/966551961517?text='+encodeURIComponent('السلام عليكم، أرغب بطلب '+product.name);document.getElementById('orderBtn').href=wa;document.getElementById('floatWhatsapp').href=wa;const main=document.getElementById('mainImage');const gallery=document.getElementById('thumbGallery');const formats=['webp','jpg','jpeg','png'];let found=0;for(let i=1;i<=20;i++){formats.forEach(ext=>{const path='images/products/product'+id+'/'+i+'.'+ext;const probe=new Image();probe.onload=()=>{if(found===0){main.src=path;main.alt=product.name;}const thumb=document.createElement('img');thumb.src=path;thumb.alt='معاينة '+product.name;thumb.loading='lazy';thumb.addEventListener('click',()=>{main.src=path;document.querySelectorAll('.thumb-gallery img').forEach(item=>item.classList.remove('active'));thumb.classList.add('active');});gallery.appendChild(thumb);found++;};probe.onerror=()=>{if(found===0&&i===1&&ext==='png'){main.src=fallback;}};probe.src=path;});}}).catch(error=>{document.getElementById('productName').textContent='تعذر تحميل الخدمة';document.getElementById('productDescription').textContent=error.message;});
+function closeLightbox(){document.getElementById('lightbox').style.display='none';}document.getElementById('mainImage').addEventListener('click',()=>{const image=document.getElementById('mainImage');if(!image.src)return;document.getElementById('lightboxImg').src=image.src;document.getElementById('lightbox').style.display='flex';});document.getElementById('lightbox').addEventListener('click',event=>{if(event.target.id==='lightbox')closeLightbox();});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeLightbox();});
 </script>
-<div class="floating-buttons">
-
-  <a id="floatWhatsapp" class="float-btn whatsapp-float" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
-  </a>
-
-  <a href="https://t.me/Tahsenk" target="_blank" class="float-btn telegram-float">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
-  </a>
-
-</div>
 </body>
 </html>

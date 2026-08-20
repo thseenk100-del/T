@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thseenk100-del.github.io/T/sitemap.xml
