@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" role="img" aria-labelledby="title desc">
+  <title id="title">معاينة المنتج غير متاحة</title>
+  <desc id="desc">مساحة محايدة لعرض المنتج عند عدم توفر صورة موثقة</desc>
+  <rect width="900" height="1125" fill="#0b3327"/>
+  <circle cx="720" cy="185" r="92" fill="#a9823a" opacity=".22"/>
+  <path d="M120 840h660" stroke="#dcc48f" stroke-opacity=".5"/>
+  <text x="450" y="505" fill="#f5e5b9" font-family="Cairo, Arial, sans-serif" font-size="44" text-anchor="middle" direction="rtl">معاينة المنتج</text>
+  <text x="450" y="570" fill="#ffffff" fill-opacity=".65" font-family="Cairo, Arial, sans-serif" font-size="24" text-anchor="middle" direction="rtl">الصورة غير متاحة حاليًا</text>
+  <text x="450" y="900" fill="#ffffff" fill-opacity=".88" font-family="Cairo, Arial, sans-serif" font-size="30" text-anchor="middle" direction="rtl">تحسينك</text>
+</svg>

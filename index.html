@@ -245,10 +245,9 @@ fetch("./data/products.json")
           ${items.map(item => `
             <div class="product-card">
 
-              <img 
+              <img
   class="product-thumb"
-  data-id="${item.id}"
-  src="images/products/product${item.id}/1.webp"
+  src="${Array.isArray(item.media) && item.media[0] ? item.media[0] : 'images/product-placeholder.svg'}"
   alt="${item.name}"
   loading="lazy"
 >
@@ -283,9 +282,8 @@ fetch("./data/products.json")
     img.addEventListener("error", () => {
       if (img.dataset.fallback) return;
       img.dataset.fallback = "true";
-      img.src = "images/products/product1/1.webp";
+      img.src = "images/product-placeholder.svg";
     }, { once: true });
-    startSlider(img);
   });
 
   document.querySelectorAll(".scroll-btn.left").forEach(btn=>{
@@ -304,79 +302,6 @@ fetch("./data/products.json")
 
 })
 .catch(err => console.error("JSON Error:", err));
-
-function startSlider(img){
-
-  if(img.dataset.started) return;
-  img.dataset.started = "true";
-
-  const id = img.dataset.id;
-  const basePath = `images/products/product${id}/`;
-  const formats = ["webp","jpg","jpeg","png"];
-
-  let images = [];
-  let index = 1;
-
-  function tryNumber(){
-
-    let formatIndex = 0;
-
-    function tryFormat(){
-
-      if(formatIndex >= formats.length){
-        // لم نجد أي صيغة لهذا الرقم → نبدأ التقليب
-        startLoop();
-        return;
-      }
-
-      const path = `${basePath}${index}.${formats[formatIndex]}`;
-      const test = new Image();
-
-      test.onload = function(){
-        images.push(path);
-        index++;
-        tryNumber();
-      };
-
-      test.onerror = function(){
-        formatIndex++;
-        tryFormat();
-      };
-
-      test.src = path;
-    }
-
-    tryFormat();
-  }
-
-  function startLoop(){
-
-  if(images.length === 0) return;
-
-  img.src = images[0];
-  img.style.transition = "opacity 0.6s ease";
-  img.style.opacity = 1;
-
-  if(images.length === 1) return;
-
-  let current = 0;
-
-  setInterval(()=>{
-
-    current = (current + 1) % images.length;
-
-    img.style.opacity = 0;
-
-    setTimeout(()=>{
-      img.src = images[current];
-      img.style.opacity = 1;
-    },300);
-
-  },4000);
-              }
-
-  tryNumber();
-}
 </script>
 <script>
 document.querySelectorAll(".faq-question").forEach(btn=>{
