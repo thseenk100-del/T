@@ -32,15 +32,15 @@
     <section class="hero hero-home" aria-labelledby="heroTitle">
       <div class="overlay" aria-hidden="true"></div>
       <div class="hero-content">
-        <p class="eyebrow">خدمات تعليمية عملية للمعلمين والمعلمات</p>
-        <h1 id="heroTitle">ملفك المهني، مرتب كما ينبغي أن يكون.</h1>
+        <p class="eyebrow">ملفات تعليمية مصممة لسياقك المهني</p>
+        <h1 id="heroTitle">رتّب حضورك المهني، من أول ملف.</h1>
         <p>ملفات إنجاز وأداء وظيفي وخطط تعليمية تُجهّز بعناية، وتصل إليك بصيغة واضحة قابلة للتعديل.</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#services">استعرض الملفات</a>
+          <a class="btn-primary" href="#services">ابدأ من الملفات</a>
           <a class="text-link" href="https://wa.me/966551961517?text=السلام عليكم، أحتاج مساعدة في اختيار الخدمة المناسبة" target="_blank" rel="noreferrer">تحدث معنا أولًا</a>
         </div>
       </div>
-      <div class="hero-note"><span>01</span><strong>اختيار واضح</strong><small>تصفح حسب نوع الملف والاحتياج</small></div>
+      <aside class="hero-index" aria-label="طريقة البدء"><span class="hero-index-kicker">مسار واضح</span><ol><li><b>01</b><span>اختر الفئة</span></li><li><b>02</b><span>راجع التفاصيل</span></li><li><b>03</b><span>أرسل طلبك</span></li></ol></aside>
     </section>
 
     <section class="trust-strip" aria-label="مؤشرات تحسينك">
@@ -50,6 +50,8 @@
         <div><strong>24 ساعة</strong><span>سرعة استجابة</span></div>
       </div>
     </section>
+
+    <section class="decision-strip" aria-labelledby="decisionTitle"><div class="container"><div><p class="eyebrow eyebrow-dark">كيف تبدأ؟</p><h2 id="decisionTitle">من الاحتياج إلى الطلب، بدون تشتّت.</h2></div><div class="decision-steps"><span><b>01</b> اختر الفئة المناسبة</span><span><b>02</b> اقرأ الوصف والسعر</span><span><b>03</b> اطلب عبر واتساب</span></div></div></section>
 
     <section id="services" class="services-section" aria-labelledby="servicesTitle">
       <div class="container">
@@ -97,7 +99,7 @@
   <script>
   (()=>{const state={products:{},category:'all',query:''};const $=s=>document.querySelector(s);const search=$('#productSearch'),filters=$('#categoryFilters'),catalog=$('#categoriesContainer'),empty=$('#emptyState'),status=$('#resultsStatus');let cart=JSON.parse(localStorage.getItem('cart')||'[]');
   const imageFor=p=>Array.isArray(p.media)&&p.media[0]?p.media[0]:'images/product-placeholder.svg';
-  function render(){const entries=Object.entries(state.products).map(([id,p])=>({id,...p})).filter(p=>(state.category==='all'||p.category===state.category)&&(!state.query||`${p.name} ${p.description}`.includes(state.query)));const groups={};entries.forEach(p=>(groups[p.category]??=[]).push(p));catalog.innerHTML=Object.entries(groups).map(([cat,items])=>`<section class="catalog-group" data-category="${cat}"><div class="category-title"><h3>${cat}</h3><span>${items.length} ملفات</span></div><div class="product-grid">${items.map(p=>`<article class="product-card"><img class="product-thumb" src="${imageFor(p)}" alt="${p.name}" loading="lazy"><div class="product-card-body"><p class="product-card-category">${p.category}</p><h3>${p.name}</h3><p class="product-card-description">${p.description}</p><div class="product-card-footer"><strong>${p.price} ريال</strong><div class="product-actions"><a href="product.html?id=${p.id}" class="btn-outline">عرض</a><button class="btn-solid add-to-cart" type="button" data-id="${p.id}">أضف للسلة</button></div></div></div></article>`).join('')}</div></section>`).join('');empty.hidden=entries.length!==0;status.textContent=`عرض ${entries.length} من ${Object.keys(state.products).length} ملف`;catalog.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{if(!img.dataset.fallback){img.dataset.fallback='1';img.src='images/product-placeholder.svg'}},{once:true}));catalog.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{const p=state.products[btn.dataset.id];cart.push({id:btn.dataset.id,name:p.name,price:Number(p.price)});updateCart()}));}
+  function render(){const entries=Object.entries(state.products).map(([id,p])=>({id,...p})).filter(p=>(state.category==='all'||p.category===state.category)&&(!state.query||`${p.name} ${p.description}`.includes(state.query)));const groups={};entries.forEach(p=>(groups[p.category]??=[]).push(p));catalog.innerHTML=Object.entries(groups).map(([cat,items])=>`<section class="catalog-group" data-category="${cat}"><div class="category-title"><h3>${cat}</h3><span>${items.length} ملفات</span></div><div class="product-grid">${items.map(p=>`<article class="product-card">${Array.isArray(p.media)&&p.media[0]?`<img class="product-thumb" src="${p.media[0]}" alt="${p.name}" loading="lazy">`:`<div class="product-cover" role="img" aria-label="معاينة نصية لـ ${p.name}"><span>تحسينك</span><strong>${p.name}</strong><small>${p.category}</small></div>`}<div class="product-card-body"><p class="product-card-category">${p.category}</p><h3>${p.name}</h3><p class="product-card-description">${p.description}</p><div class="product-card-footer"><strong>${p.price} ريال</strong><div class="product-actions"><a href="product.html?id=${p.id}" class="btn-outline">عرض</a><button class="btn-solid add-to-cart" type="button" data-id="${p.id}">أضف للسلة</button></div></div></div></article>`).join('')}</div></section>`).join('');empty.hidden=entries.length!==0;status.textContent=`عرض ${entries.length} من ${Object.keys(state.products).length} ملف`;catalog.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{if(!img.dataset.fallback){img.dataset.fallback='1';img.src='images/product-placeholder.svg'}},{once:true}));catalog.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{const p=state.products[btn.dataset.id];cart.push({id:btn.dataset.id,name:p.name,price:Number(p.price)});updateCart()}));}
   function updateFilters(){const cats=['all',...new Set(Object.values(state.products).map(p=>p.category))];filters.innerHTML=cats.map(c=>`<button type="button" class="category-chip ${state.category===c?'is-active':''}" data-category="${c}" aria-pressed="${state.category===c}">${c==='all'?'كل الملفات':c}</button>`).join('');filters.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.category;updateFilters();render()}));}
   function updateCart(){localStorage.setItem('cart',JSON.stringify(cart));$('#cartCount').textContent=cart.length;$('#cartTotal').textContent=cart.reduce((sum,p)=>sum+Number(p.price||0),0);$('#cartItems').innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-item"><span>${p.name}</span><strong>${p.price} ريال</strong><button type="button" data-remove="${i}" aria-label="حذف ${p.name}">×</button></div>`).join(''):'<p class="cart-empty">السلة فارغة حاليًا.</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{cart.splice(Number(b.dataset.remove),1);updateCart()}));}
   function toggleCart(open){const panel=$('#cartPanel');const next=open??panel.getAttribute('aria-hidden')==='true';panel.setAttribute('aria-hidden',String(!next));panel.classList.toggle('is-open',next);$('#cartToggle').setAttribute('aria-expanded',String(next));if(next)$('#cartClose').focus();}
