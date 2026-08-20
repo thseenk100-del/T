@@ -7,6 +7,11 @@
 <title>نماذج الأعمال | تحسينك</title>
 
 <meta name="description" content="استعرض نماذج أعمال تحسينك من ملفات الإنجاز والأداء الوظيفي والتحضير التعليمي المصممة باحترافية للمعلمين في السعودية.">
+<link rel="canonical" href="https://thseenk100-del.github.io/T/products.html">
+<meta property="og:title" content="نماذج الأعمال | تحسينك">
+<meta property="og:description" content="نماذج من ملفات الإنجاز والأداء الوظيفي والخدمات التعليمية للمعلمين في السعودية.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thseenk100-del.github.io/T/products.html">
 
 <meta name="theme-color" content="#0b3327">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -193,10 +198,10 @@
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="outsideClick(event)">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="معرض نماذج الأعمال" onclick="outsideClick(event)">
   <button class="lightbox-close" type="button" onclick="closeLightbox()" aria-label="إغلاق المعرض">×</button>
   <button class="lightbox-nav lightbox-prev" type="button" onclick="prevImage()" aria-label="الصورة السابقة">←</button>
-  <img id="lightbox-img">
+  <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="معاينة نموذج أعمال">
   <button class="lightbox-nav lightbox-next" type="button" onclick="nextImage()" aria-label="الصورة التالية">→</button>
 </div>
 
@@ -210,32 +215,49 @@ const images = [
 ];
 
 let currentIndex = 0;
+let lastFocusedElement = null;
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-img");
+const lightboxClose = document.querySelector(".lightbox-close");
+
+function updateLightboxImage(){
+  lightboxImage.src = images[currentIndex];
+  lightboxImage.alt = `معاينة نموذج أعمال ${currentIndex + 1}`;
+}
 
 function openLightbox(index){
   currentIndex = index;
-  document.getElementById("lightbox-img").src = images[currentIndex];
-  document.getElementById("lightbox").style.display = "flex";
+  lastFocusedElement = document.activeElement;
+  updateLightboxImage();
+  lightbox.style.display = "flex";
+  lightboxClose.focus();
 }
 
 function closeLightbox(){
-  document.getElementById("lightbox").style.display = "none";
+  lightbox.style.display = "none";
+  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") lastFocusedElement.focus();
 }
 
 function nextImage(){
   currentIndex = (currentIndex + 1) % images.length;
-  document.getElementById("lightbox-img").src = images[currentIndex];
+  updateLightboxImage();
 }
 
 function prevImage(){
   currentIndex = (currentIndex - 1 + images.length) % images.length;
-  document.getElementById("lightbox-img").src = images[currentIndex];
+  updateLightboxImage();
 }
 
 function outsideClick(e){
-  if(e.target.id === "lightbox"){
-    closeLightbox();
-  }
+  if(e.target.id === "lightbox") closeLightbox();
 }
+
+document.addEventListener("keydown", event => {
+  if (lightbox.style.display !== "flex") return;
+  if (event.key === "Escape") closeLightbox();
+  if (event.key === "ArrowRight") nextImage();
+  if (event.key === "ArrowLeft") prevImage();
+});
 </script>
 
 </body>

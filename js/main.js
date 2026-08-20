@@ -26,7 +26,7 @@
     });
   }
 
-  const revealElements = [...document.querySelectorAll("section")];
+  const revealElements = [...document.querySelectorAll("section:not(.hero)")];
   const revealOnScroll = () => {
     const threshold = window.innerHeight - 100;
     revealElements.forEach(element => {
