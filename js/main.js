@@ -48,6 +48,17 @@
     if (event.matches) revealElements.forEach(element => element.classList.add("is-visible"));
   });
 
+  document.querySelectorAll(".faq-question").forEach(question => {
+    question.addEventListener("click", () => {
+      const item = question.closest(".faq-item");
+      const answer = item?.querySelector(".faq-answer");
+      if (!answer) return;
+      const isOpen = item.classList.toggle("is-open");
+      question.setAttribute("aria-expanded", String(isOpen));
+      answer.hidden = !isOpen;
+    });
+  });
+
   const backToTop = document.createElement("button");
   backToTop.type = "button";
   backToTop.className = "back-to-top";
@@ -66,7 +77,7 @@
       image.addEventListener("error", () => {
         if (image.dataset.fallback) return;
         image.dataset.fallback = "true";
-        image.src = "images/products/product1/1.webp";
+        image.src = "images/product-placeholder.svg";
       }, { once: true });
     });
   });
