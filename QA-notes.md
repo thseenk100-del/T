@@ -7,3 +7,11 @@
 لقطة الهاتف أثبتت انهيار التنقل إلى زر قائمة صحيح وعدم وجود قص أفقي، لكنها أظهرت حاجة إلى رفع تباين زر الدعوة الأساسي داخل hero على الخلفية الداكنة؛ ستتم معالجتها بتلوين الزر بلون فاتح على الهاتف فقط مع إبقاء الهرمية البصرية.
 
 تمت معالجة ملاحظة التباين: أزيلت طبقة التعتيم inline القديمة من hero عبر override مضبوط، وأصبح العنوان أبيض والزر بلون فاتح عالي التباين. أكد الفحص المحسوب أن `scrollWidth` لا يتجاوز `innerWidth` وأن ألوان العنوان والزر والـoverlay كما هو مقصود.
+
+## ui-ux-pro-max Saudi-market pass — 2026-08-20
+
+تمت قراءة `pasted_content_5.txt` كاملًا، وقراءة `SKILL.md` و`quick-reference.md` و`pro-rules.md` و`search.py` من النسخة المحلية للمستودع. أُنشئ Design System محفوظ في `design-system/tahsenk-saudi-store/MASTER.md` باستعلام سعودي مخصص، مع استعلامات منفصلة للثقة، RTL/mobile navigation، اكتشاف المنتجات، تفاصيل المنتج، الوصول، الصور/CLS، وStack.
+
+أُصلح `js/main.js` ليحترم reduced motion، ويغلق قائمة الهاتف عبر Escape وخارج القائمة، ويستخدم زر عودة دلاليًا بحالة مرئية، ويترك صور hero/المنتج الحرجة eager، ويطبق fallback للصور فقط عند الفشل. أُضيفت tokens وحالات focus وtouch targets وreveal classes في `css/styles.css`. أُضيف structured data من بيانات المنتج المحلية فقط في `product.html`، مع placeholder inline للصورة الفارغة في lightbox.
+
+نتائج QA: `node --check js/main.js` ناجح، `git diff --check` ناجح، فحص الروابط والأصول المحلية PASS بلا مراجع ناقصة، الصفحات والأصول الأساسية أعادت 200 محليًا، الصفحة الرئيسية بلا horizontal overflow وبلا صور مكسورة، ولقطات فعلية أُنشئت عند 320 و360 و390 و414 و768 و1024 و1280 و1440. لا يوجد storefront `package.json`؛ لذلك lint/typecheck/tests/build غير متاحة وليست نتائج نجاح مدعاة.

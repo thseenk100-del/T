@@ -1,102 +1,73 @@
-/* ===============================
-   NAVBAR TOGGLE (Mobile)
-================================= */
+/* Tahsenk shared interaction layer — static HTML/CSS/JS */
+(() => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.querySelector(".nav-links");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.querySelector(".nav-links");
+  const closeMenu = () => {
+    if (!navLinks || !menuToggle) return;
+    navLinks.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+  };
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    menuToggle.setAttribute("aria-expanded", navLinks.classList.contains("active"));
-  });
-}
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("active");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
 
-/* ===============================
-   CLOSE MENU WHEN CLICK LINK
-================================= */
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    if (navLinks) navLinks.classList.remove("active");
-    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
-  });
-});
-
-/* ===============================
-   SCROLL REVEAL EFFECT
-================================= */
-
-const revealElements = document.querySelectorAll("section");
-
-const revealOnScroll = () => {
-  const windowHeight = window.innerHeight;
-
-  revealElements.forEach(el => {
-    const elementTop = el.getBoundingClientRect().top;
-
-    if (elementTop < windowHeight - 100) {
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
-    }
-  });
-};
-
-window.addEventListener("scroll", revealOnScroll);
-
-revealElements.forEach(el => {
-  el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-});
-window.addEventListener("load", revealOnScroll);
-
-/* ===============================
-   BACK TO TOP BUTTON
-================================= */
-
-const backToTop = document.createElement("button");
-backToTop.innerText = "↑";
-backToTop.setAttribute("aria-label", "العودة إلى أعلى الصفحة");
-backToTop.style.position = "fixed";
-backToTop.style.bottom = "20px";
-backToTop.style.left = "20px";
-backToTop.style.padding = "10px 15px";
-backToTop.style.border = "none";
-backToTop.style.borderRadius = "12px";
-backToTop.style.background = "#155b43";
-backToTop.style.color = "#fff";
-backToTop.style.cursor = "pointer";
-backToTop.style.display = "none";
-backToTop.style.zIndex = "999";
-
-document.body.appendChild(backToTop);
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTop.style.display = "block";
-  } else {
-    backToTop.style.display = "none";
+    navLinks.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeMenu();
+    });
+    document.addEventListener("click", event => {
+      if (!navLinks.classList.contains("active")) return;
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+    });
   }
-});
 
-backToTop.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+  const revealElements = [...document.querySelectorAll("section")];
+  const revealOnScroll = () => {
+    const threshold = window.innerHeight - 100;
+    revealElements.forEach(element => {
+      if (element.getBoundingClientRect().top < threshold) {
+        element.classList.add("is-visible");
+      }
+    });
+  };
+
+  revealElements.forEach(element => {
+    element.classList.add("reveal-section");
+    if (reducedMotion.matches) element.classList.add("is-visible");
   });
-});
-
-/* ===============================
-   LAZY LOADING IMAGES
-================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll("img");
-  images.forEach(img => {
-    img.setAttribute("loading", "lazy");
-    img.addEventListener("error", () => {
-      if (img.dataset.fallback) return;
-      img.dataset.fallback = "true";
-      img.src = "images/products/product1/1.webp";
-    }, { once: true });
+  if (!reducedMotion.matches) {
+    window.addEventListener("scroll", revealOnScroll, { passive: true });
+    window.addEventListener("load", revealOnScroll, { once: true });
+  }
+  reducedMotion.addEventListener?.("change", event => {
+    if (event.matches) revealElements.forEach(element => element.classList.add("is-visible"));
   });
-});
+
+  const backToTop = document.createElement("button");
+  backToTop.type = "button";
+  backToTop.className = "back-to-top";
+  backToTop.textContent = "↑";
+  backToTop.setAttribute("aria-label", "العودة إلى أعلى الصفحة");
+  backToTop.title = "العودة إلى أعلى الصفحة";
+  document.body.appendChild(backToTop);
+
+  const syncBackToTop = () => backToTop.classList.toggle("is-visible", window.scrollY > 300);
+  window.addEventListener("scroll", syncBackToTop, { passive: true });
+  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" }));
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("img").forEach(image => {
+      if (!image.hasAttribute("loading") && !image.closest(".hero, .product-visual")) image.loading = "lazy";
+      image.addEventListener("error", () => {
+        if (image.dataset.fallback) return;
+        image.dataset.fallback = "true";
+        image.src = "images/products/product1/1.webp";
+      }, { once: true });
+    });
+  });
+})();
